@@ -1,5 +1,9 @@
 # my_finances
 
+## npm i yarn -g
+
+To install yarn and use project
+
 ## [Yarn Plug and Play](https://yarnpkg.com/lang/en/docs/pnp/)
 
 To get intellisense working in VSCode, you need to use the workspace version of typescript. To do this, click on the typescript version on the bottom right of any typescript file, and select "Use Workspace Version". See https://next.yarnpkg.com/advanced/pnpify for more details.t
