@@ -47,8 +47,13 @@ typings/
 # TypeScript cache
 *.tsbuildinfo
 
-# Optional npm cache directory
+# Optional npm and yarn cache directory
 .npm
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.pnp.*
+.vscode/
 
 # Optional eslint cache
 .eslintcache
