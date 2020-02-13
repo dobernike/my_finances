@@ -7,12 +7,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { TypedCssModulesPlugin } = require('typed-css-modules-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 const PnpWebpackPlugin = require(`pnp-webpack-plugin`);
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
+
+const isModern = process.env.BROWSERSLIST_ENV === 'modern';
+const buildRoot = path.resolve(__dirname, 'dist');
 
 const optimization = () => {
     const config = {
@@ -22,7 +24,17 @@ const optimization = () => {
     };
 
     if (isProd) {
-        config.minimizer = [new OptimizeCssAssetsWebpackPlugin(), new UglifyjsWebpackPlugin()];
+        config.minimizer = [
+            new OptimizeCssAssetsWebpackPlugin(),
+            isModern
+                ? new TerserWebpackPlugin({
+                      terserOptions: {
+                          ecma: 8,
+                          safari10: true,
+                      },
+                  })
+                : new TerserWebpackPlugin(),
+        ];
     }
 
     return config;
@@ -62,7 +74,7 @@ const cssLoaders = () => {
 
 const babelOptions = (...presets) => {
     const opts = {
-        presets: [require.resolve('@babel/preset-env')],
+        presets: [isModern ? require.resolve('@babel/preset-modules') : require.resolve('@babel/preset-env')],
         plugins: [require.resolve('@babel/plugin-proposal-class-properties')],
     };
 
@@ -77,7 +89,6 @@ const babelOptions = (...presets) => {
 
 const jsLoaders = () => {
     const loaders = [
-        require.resolve('cache-loader'),
         require.resolve('thread-loader'),
         {
             loader: require.resolve('babel-loader'),
@@ -120,10 +131,6 @@ const plugins = () => {
         }),
     ];
 
-    if (isProd) {
-        base.push(new BundleAnalyzerPlugin());
-    }
-
     return base;
 };
 
@@ -131,11 +138,14 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     entry: {
-        main: ['./index.tsx'],
+        main: [
+            isModern ? path.resolve(__dirname, 'polyfills.modern.js') : path.resolve(__dirname, 'polyfills.legacy.js'),
+            './index.tsx',
+        ],
     },
     output: {
+        path: buildRoot + (isModern ? '/modern' : '/legacy'),
         filename: filename('js'),
-        path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
         plugins: [PnpWebpackPlugin],
@@ -174,7 +184,6 @@ module.exports = {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 use: [
-                    require.resolve('cache-loader'),
                     require.resolve('thread-loader'),
                     {
                         loader: require.resolve('babel-loader'),
@@ -186,7 +195,6 @@ module.exports = {
                 test: /\.jsx$/,
                 exclude: /node_modules/,
                 use: [
-                    require.resolve('cache-loader'),
                     require.resolve('thread-loader'),
                     {
                         loader: require.resolve('babel-loader'),
@@ -198,7 +206,6 @@ module.exports = {
                 test: /\.tsx$/,
                 exclude: /node_modules/,
                 use: [
-                    require.resolve('cache-loader'),
                     require.resolve('thread-loader'),
                     {
                         loader: require.resolve('babel-loader'),
