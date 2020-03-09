@@ -1,15 +1,21 @@
 import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
-
-import store from './store';
-import ErrorBoundary from './components/ErrorBoundary';
+import { Router } from '@reach/router';
+import store from './store/store';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import Layout from './hoc/Layout/Layout';
+import DeptsPage from './pages/DeptsPage';
 
 export default class App extends PureComponent {
     render() {
         return (
             <Provider store={store}>
                 <ErrorBoundary>
-                    <div>app</div>
+                    <Layout>
+                        <Router>
+                            <DeptsPage path="/" />
+                        </Router>
+                    </Layout>
                 </ErrorBoundary>
             </Provider>
         );

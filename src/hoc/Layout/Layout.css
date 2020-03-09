@@ -1,0 +1,17 @@
+.layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0 16px;
+
+    @media (--media-desktop) {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
