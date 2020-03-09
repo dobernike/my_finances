@@ -6,7 +6,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const PnpWebpackPlugin = require(`pnp-webpack-plugin`);
 const postcssCustomMedia = require('postcss-custom-media');
 const postcssNesting = require('postcss-nested');
 
@@ -50,7 +49,7 @@ const cssLoaders = () => {
             },
         },
         {
-            loader: require.resolve('css-loader'),
+            loader: 'css-loader',
             options: {
                 importLoaders: 1,
                 modules: {
@@ -59,9 +58,9 @@ const cssLoaders = () => {
             },
         },
         {
-            loader: require.resolve('postcss-loader'),
+            loader: 'postcss-loader',
             options: {
-                ident: require.resolve('postcss'),
+                ident: 'postcss',
                 plugins: () => [
                     postcssCustomMedia({ importFrom: './src/constants/breakpoints.css' }),
                     postcssNesting(),
@@ -75,8 +74,8 @@ const cssLoaders = () => {
 
 const babelOptions = (presets) => {
     const opts = {
-        presets: [isModern ? require.resolve('@babel/preset-modules') : require.resolve('@babel/preset-env')],
-        plugins: [require.resolve('@babel/plugin-proposal-class-properties')],
+        presets: [isModern ? '@babel/preset-modules' : '@babel/preset-env'],
+        plugins: ['@babel/plugin-proposal-class-properties'],
     };
 
     if (presets) {
@@ -90,15 +89,15 @@ const babelOptions = (presets) => {
 
 const jsLoaders = (...presets) => {
     const loaders = [
-        require.resolve('thread-loader'),
+        'thread-loader',
         {
-            loader: require.resolve('babel-loader'),
+            loader: 'babel-loader',
             options: babelOptions(presets),
         },
     ];
 
     if (isDev) {
-        loaders.push(require.resolve('eslint-loader'));
+        loaders.push('eslint-loader');
     }
 
     return loaders;
@@ -146,18 +145,14 @@ module.exports = {
         filename: filename('js'),
     },
     resolve: {
-        plugins: [PnpWebpackPlugin],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    },
-    resolveLoader: {
-        plugins: [PnpWebpackPlugin.moduleLoader(module)],
     },
     optimization: optimization(),
     devServer: {
         port: 4200,
         hot: isDev,
     },
-    devtool: isDev ? require.resolve('source-map') : '',
+    devtool: isDev ? 'source-map' : '',
     plugins: plugins(),
     module: {
         rules: [
@@ -167,11 +162,11 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,
-                use: [require.resolve('file-loader')],
+                use: ['file-loader'],
             },
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
-                use: [require.resolve('file-loader')],
+                use: ['file-loader'],
             },
             {
                 test: /\.js$/,

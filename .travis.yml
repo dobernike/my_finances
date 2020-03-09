@@ -1,0 +1,14 @@
+sudo: false
+
+language: node_js
+
+node_js:
+    - 12
+
+branches:
+    only:
+        - develop
+
+after_success:
+    - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+    - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
