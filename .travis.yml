@@ -10,7 +10,7 @@ git:
     depth: 5
 
 install:
-    - yarn install --ignore-engines
+    - yarn install
 
 branches:
     only:
