@@ -1,4 +1,7 @@
 {
+    "typeAcquisition": {
+        "enable": true
+    },
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "jsx": "react",
@@ -13,8 +16,17 @@
         "strict": true,
         "alwaysStrict": true,
         "strictNullChecks": false,
-        "downlevelIteration": true
+        "downlevelIteration": true,
+        "baseUrl": ".",
+        "allowJs": false,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "noUnusedLocals": true,
+        "lib": ["es2018", "dom"],
+        "typeRoots": ["node_modules/@types", "./typings", "./typings.d.ts"]
     },
-    "include": ["./src/"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "include": ["**/*.ts", "**/*.tsx"]
 }

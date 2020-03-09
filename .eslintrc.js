@@ -34,6 +34,7 @@ module.exports = {
         react_enableWarnings: true,
     },
     rules: {
+        curly: [2, 'all'],
         'testing-library/await-async-query': 'error',
         'testing-library/no-await-sync-query': 'error',
         'testing-library/no-debug': 'warn',
@@ -49,7 +50,7 @@ module.exports = {
         ],
         'no-restricted-globals': [2, 'find'],
         'no-var': 0,
-        'no-shadow': 1,
+        'no-shadow': 0,
         'vars-on-top': 0,
         'consistent-return': 1,
         'no-unused-vars': [2, { vars: 'all', args: 'none', varsIgnorePattern: '^React$', ignoreRestSiblings: true }],
@@ -228,7 +229,7 @@ module.exports = {
         'import/named': 2,
         'import/namespace': 2,
         'import/default': 2,
-        'import/order': 0, // ломает код :/
+        'import/order': 1,
         'import/prefer-default-export': 1,
         'import/newline-after-import': 0, // включить, как починят баг
         'import/no-webpack-loader-syntax': 1,

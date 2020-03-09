@@ -1,20 +1,18 @@
 const webpack = require('webpack');
 const path = require('path');
-const postcssNesting = require('postcss-nested');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { TypedCssModulesPlugin } = require('typed-css-modules-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const PnpWebpackPlugin = require(`pnp-webpack-plugin`);
+const postcssCustomMedia = require('postcss-custom-media');
+const postcssNesting = require('postcss-nested');
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
-
 const isModern = process.env.BROWSERSLIST_ENV === 'modern';
-const buildRoot = path.resolve(__dirname, 'dist');
 
 const optimization = () => {
     const config = {
@@ -56,7 +54,7 @@ const cssLoaders = () => {
             options: {
                 importLoaders: 1,
                 modules: {
-                    localIdentName: '[name]__[hash:base64:5]',
+                    localIdentName: isDev ? '[name]__[local]--[hash:base64:5]' : '[hash:base64:5]',
                 },
             },
         },
@@ -64,7 +62,10 @@ const cssLoaders = () => {
             loader: require.resolve('postcss-loader'),
             options: {
                 ident: require.resolve('postcss'),
-                plugins: () => [postcssNesting()],
+                plugins: () => [
+                    postcssCustomMedia({ importFrom: './src/constants/breakpoints.css' }),
+                    postcssNesting(),
+                ],
             },
         },
     ];
@@ -72,7 +73,7 @@ const cssLoaders = () => {
     return loaders;
 };
 
-const babelOptions = (...presets) => {
+const babelOptions = (presets) => {
     const opts = {
         presets: [isModern ? require.resolve('@babel/preset-modules') : require.resolve('@babel/preset-env')],
         plugins: [require.resolve('@babel/plugin-proposal-class-properties')],
@@ -87,12 +88,12 @@ const babelOptions = (...presets) => {
     return opts;
 };
 
-const jsLoaders = () => {
+const jsLoaders = (...presets) => {
     const loaders = [
         require.resolve('thread-loader'),
         {
             loader: require.resolve('babel-loader'),
-            options: babelOptions(),
+            options: babelOptions(presets),
         },
     ];
 
@@ -121,9 +122,6 @@ const plugins = () => {
         new MiniCssExtractPlugin({
             filename: filename('css'),
         }),
-        new TypedCssModulesPlugin({
-            globPattern: 'src/**/*.css',
-        }),
         new webpack.HashedModuleIdsPlugin({
             hashFunction: 'md4',
             hashDigest: 'base64',
@@ -144,7 +142,7 @@ module.exports = {
         ],
     },
     output: {
-        path: buildRoot + (isModern ? '/modern' : '/legacy'),
+        path: path.resolve(__dirname, 'dist') + (isModern ? '/modern' : '/legacy'),
         filename: filename('js'),
     },
     resolve: {
@@ -183,35 +181,17 @@ module.exports = {
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
-                use: [
-                    require.resolve('thread-loader'),
-                    {
-                        loader: require.resolve('babel-loader'),
-                        options: babelOptions('@babel/preset-typescript'),
-                    },
-                ],
+                use: jsLoaders('@babel/preset-typescript'),
             },
             {
                 test: /\.jsx$/,
                 exclude: /node_modules/,
-                use: [
-                    require.resolve('thread-loader'),
-                    {
-                        loader: require.resolve('babel-loader'),
-                        options: babelOptions('@babel/preset-react'),
-                    },
-                ],
+                use: jsLoaders('@babel/preset-react'),
             },
             {
                 test: /\.tsx$/,
                 exclude: /node_modules/,
-                use: [
-                    require.resolve('thread-loader'),
-                    {
-                        loader: require.resolve('babel-loader'),
-                        options: babelOptions('@babel/preset-react', '@babel/preset-typescript'),
-                    },
-                ],
+                use: jsLoaders('@babel/preset-react', '@babel/preset-typescript'),
             },
         ],
     },

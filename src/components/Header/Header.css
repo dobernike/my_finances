@@ -1,0 +1,151 @@
+.header {
+    @media (--media-desktop) {
+        background-color: var(--color-background-secondary);
+    }
+}
+
+.banner {
+    padding: 0 16px;
+
+    height: 48px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--color-background-secondary);
+
+    @media (--media-tablet) {
+        height: 60px;
+    }
+
+    @media (--media-desktop) {
+        margin: 0 auto;
+        width: 1200px;
+        background-color: transparent;
+    }
+}
+
+.topWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.logoLink {
+    margin-right: 45px;
+    color: var(--color-black);
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:active {
+        color: var(--color-black);
+        text-decoration: none;
+    }
+}
+
+.logo {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+
+    @media (--media-tablet) {
+        font-size: 1.2rem;
+    }
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.navList {
+    display: flex;
+}
+
+.link {
+    color: var(--color-navigation-link);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+        color: var(--color-black);
+        text-decoration: none;
+    }
+
+    &:active {
+        color: var(--color-navigation-link);
+        text-decoration: none;
+    }
+}
+
+.a {
+    display: flex;
+    color: var(--color-navigation-link);
+    font-size: 20px;
+    text-decoration: none;
+    background-color: var(--color-white);
+    position: relative;
+    padding: 8px 16px;
+    transition: opacity 0.3s;
+
+    &:hover,
+    &:focus {
+        color: var(--color-black);
+        text-decoration: none;
+    }
+
+    &:active {
+        color: var(--color-navigation-link);
+        text-decoration: none;
+    }
+}
+
+.topNavigation {
+    display: none;
+
+    @media (--media-desktop) {
+        display: block;
+    }
+}
+
+.bottomNavigation {
+    @media (--media-desktop) {
+        display: none;
+    }
+}
+
+.navigation {
+    height: 48px;
+
+    display: flex;
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--color-dark-grey);
+}
+
+.item:not(:last-child) {
+    margin-right: 18px;
+}
+
+.scrollBlock {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.scrollContainer {
+    padding: 0 16px;
+    display: inline-block;
+}
+
+.menuButton {
+    @media (--media-tablet) {
+        display: none;
+    }
+}
