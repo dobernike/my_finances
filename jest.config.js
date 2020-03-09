@@ -1,15 +1,14 @@
-const path = require('path');
-
 module.exports = {
     clearMocks: false,
     testRegex: '(/__tests__/.*|\\.(test|spec))\\.(js|jsx|ts|tsx)$',
     collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
     moduleNameMapper: {
-        '\\.(css|less|scss|sss|styl)$': require.resolve('jest-css-modules'),
+        '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
     },
     transform: {
-        '^.+\\.(js|jsx|ts|tsx)?$': require.resolve('babel-jest'),
+        '^.+\\.(js|jsx|ts|tsx)?$': '<rootDir>/node_modules/babel-jest',
     },
-    setupFilesAfterEnv: [path.resolve(__dirname, 'src/setupTests.js')],
+    testPathIgnorePatterns: ['<rootDir>/(node_modules|.vscode)/'],
+    setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
     preset: 'ts-jest',
 };
