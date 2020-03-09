@@ -1,5 +1,12 @@
 # my_finances
 
+[![Travis][build-badge]][build] [![Coveralls][coveralls-badge]][coveralls]
+
+[build-badge]: https://img.shields.io/travis/dobernike/my_finances/master.png?style=flat-square
+[build]: https://travis-ci.org/dobernike/my_finances
+[coveralls-badge]: https://img.shields.io/coveralls/dobernike/my_finances/develop.png?style=flat-square
+[coveralls]: https://coveralls.io/github/dobernike/my_finances
+
 ## npm i yarn -g
 
 To install yarn and use project
