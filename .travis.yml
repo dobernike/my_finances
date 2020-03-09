@@ -1,8 +1,16 @@
 sudo: false
 
 language: node_js
+cache: yarn
+
 node_js:
     - 12
+
+git:
+    depth: 5
+
+install:
+    - yarn install --ignore-engines
 
 branches:
     only:
