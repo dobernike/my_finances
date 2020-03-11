@@ -1,12 +1,14 @@
 # my finances
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e3497ff1-6439-41c5-97a0-46fd405ab4a2/deploy-status)](https://app.netlify.com/sites/my-finances/deploys)
+
 ![](https://github.com/dobernike/my_finances/workflows/JS/badge.svg) ![](https://github.com/dobernike/my_finances/workflows/CSS/badge.svg) ![](https://github.com/dobernike/my_finances/workflows/TESTS/badge.svg)
 
 [![Travis][build-badge]][build] [![Coveralls][coveralls-badge]][coveralls]
 
-[build-badge]: https://img.shields.io/travis/dobernike/my_finances/develop.svg?style=flat-square
+[build-badge]: https://img.shields.io/travis/dobernike/my_finances/develop.svg
 [build]: https://travis-ci.org/dobernike/my_finances
-[coveralls-badge]: https://img.shields.io/coveralls/dobernike/my_finances/develop.svg?style=flat-square
+[coveralls-badge]: https://img.shields.io/coveralls/dobernike/my_finances/develop.svg
 [coveralls]: https://coveralls.io/github/dobernike/my_finances
 
 ## Available Scripts

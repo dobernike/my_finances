@@ -5,6 +5,7 @@ import store from './store/store';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Layout from './hoc/Layout/Layout';
 import DeptsPage from './pages/DeptsPage';
+import './constants/colors.css';
 
 export default class App extends PureComponent {
     render() {
