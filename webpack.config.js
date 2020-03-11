@@ -115,7 +115,11 @@ const plugins = () => {
         new CopyWebpackPlugin([
             {
                 from: path.resolve(__dirname, 'public/favicon.ico'),
-                to: path.resolve(__dirname, 'dist'),
+                to: path.resolve(__dirname, isModern ? 'dist/modern' : 'dist/legacy'),
+            },
+            {
+                from: path.resolve(__dirname, 'public/critical.css'),
+                to: path.resolve(__dirname, isModern ? 'dist/modern' : 'dist/legacy'),
             },
         ]),
         new MiniCssExtractPlugin({
