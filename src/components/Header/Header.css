@@ -102,6 +102,10 @@
     }
 }
 
+.linkActive {
+    color: var(--color-black);
+}
+
 .topNavigation {
     display: none;
 

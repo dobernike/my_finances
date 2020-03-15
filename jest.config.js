@@ -2,6 +2,7 @@ module.exports = {
     clearMocks: false,
     testRegex: '(/__tests__/.*|\\.(test|spec))\\.(js|jsx|ts|tsx)$',
     collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+    coveragePathIgnorePatterns: ['src/index.tsx'],
     moduleNameMapper: {
         '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
     },

@@ -1,3 +1,5 @@
+import { getLocalStorage } from '../../services/localStorage/getLocalStorage';
+
 type LogInAction = {
     type: string;
 };
@@ -13,10 +15,10 @@ export type AuthState = {
 export type AuthAction = LogInAction | LogOutAction;
 
 export const initialState = {
-    isAuthenticated: true,
+    isAuthenticated: !!getLocalStorage('userData'),
 };
 
-export default (state: AuthState = initialState, action: AuthAction) => {
+export const authReducer = (state: AuthState = initialState, action: AuthAction) => {
     switch (action.type) {
         case 'LOG_IN':
             return { ...state, isAuthenticated: true };

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router';
+import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 import { Drawer, Button } from '@blueprintjs/core';
 import { connect } from 'react-redux';
+import { getRoutes } from '../../routes';
 import styles from './Header.css';
 import { RootState } from '../../store/reducers/rootReducer';
-import routes from '../../routes';
 import AuthButton from '../AuthButton/AuthButton';
 
 type Props = {
@@ -31,6 +31,7 @@ class Header extends Component<Props, State> {
 
     render() {
         const { isAuthenticated } = this.props;
+        const routes = getRoutes(isAuthenticated);
 
         return (
             <header className={styles.header}>
@@ -44,43 +45,35 @@ class Header extends Component<Props, State> {
                         position="left"
                         title="">
                         <ul className={styles.list}>
-                            {routes
-                                .filter((route) => (isAuthenticated ? route : !route.isPrivate))
-                                .map(({ to, label }) => (
-                                    <li key={label + to}>
-                                        <Link
-                                            className={styles.a}
-                                            to={to}
-                                            onClick={this.handleCloseMenu}
-                                            getProps={({ isCurrent }) => ({
-                                                style: { color: isCurrent ? 'black' : '' },
-                                            })}>
-                                            {label}
-                                        </Link>
-                                    </li>
-                                ))}
+                            {routes.map((route) => (
+                                <li key={route.path}>
+                                    <NavLink
+                                        activeClassName={styles.linkActive}
+                                        className={styles.a}
+                                        to={route.path}
+                                        onClick={this.handleCloseMenu}>
+                                        {route.label}
+                                    </NavLink>
+                                </li>
+                            ))}
                         </ul>
                     </Drawer>
                     <div className={styles.topWrapper}>
-                        <Link to="/" className={styles.logoLink}>
+                        <NavLink to="/" className={styles.logoLink}>
                             <p className={styles.logo}>Мои финансы</p>
-                        </Link>
+                        </NavLink>
                         <nav className={styles.topNavigation}>
                             <ul className={cx(styles.list, styles.navList)}>
-                                {routes
-                                    .filter((route) => (isAuthenticated ? route : !route.isPrivate))
-                                    .map(({ to, label }) => (
-                                        <li key={label + to} className={styles.item}>
-                                            <Link
-                                                className={styles.link}
-                                                to={to}
-                                                getProps={({ isCurrent }) => ({
-                                                    style: { color: isCurrent ? 'black' : '' },
-                                                })}>
-                                                {label}
-                                            </Link>
-                                        </li>
-                                    ))}
+                                {routes.map((route) => (
+                                    <li key={route.path} className={styles.item}>
+                                        <NavLink
+                                            activeClassName={styles.linkActive}
+                                            className={styles.link}
+                                            to={route.path}>
+                                            {route.label}
+                                        </NavLink>
+                                    </li>
+                                ))}
                             </ul>
                         </nav>
                     </div>
@@ -91,20 +84,16 @@ class Header extends Component<Props, State> {
                         <div className={styles.scrollBlock}>
                             <div className={styles.scrollContainer}>
                                 <ul className={cx(styles.list, styles.navList)}>
-                                    {routes
-                                        .filter((route) => (isAuthenticated ? route : !route.isPrivate))
-                                        .map(({ to, label }) => (
-                                            <li key={label + to} className={styles.item}>
-                                                <Link
-                                                    className={styles.link}
-                                                    to={to}
-                                                    getProps={({ isCurrent }) => ({
-                                                        style: { color: isCurrent ? 'black' : '' },
-                                                    })}>
-                                                    {label}
-                                                </Link>
-                                            </li>
-                                        ))}
+                                    {routes.map((route) => (
+                                        <li key={route.path} className={styles.item}>
+                                            <NavLink
+                                                className={styles.link}
+                                                to={route.path}
+                                                activeClassName={styles.linkActive}>
+                                                {route.label}
+                                            </NavLink>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>
