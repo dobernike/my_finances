@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { Button } from '@blueprintjs/core';
 import { connect } from 'react-redux';
 import styles from './AuthButton.css';
-import logIn from '../../store/actions/logIn';
-import logOut from '../../store/actions/logOut';
+import { logIn } from '../../store/actions/logIn';
+import { logOut } from '../../store/actions/logOut';
 import { RootState } from '../../store/reducers/rootReducer';
 
 type Props = {

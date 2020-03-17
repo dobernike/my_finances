@@ -1,5 +1,5 @@
 import { combineReducers, createStore } from 'redux';
-import auth, { AuthState } from './authReducer';
+import { authReducer as auth, AuthState } from './authReducer';
 
 export type RootState = {
     auth: AuthState;

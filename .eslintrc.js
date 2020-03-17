@@ -230,7 +230,7 @@ module.exports = {
         'import/namespace': 2,
         'import/default': 2,
         'import/order': 1,
-        'import/prefer-default-export': 1,
+        'import/prefer-default-export': 0, // много статей о том, что лучше делать именованный экспорт
         'import/newline-after-import': 0, // включить, как починят баг
         'import/no-webpack-loader-syntax': 1,
         'import/first': 1,

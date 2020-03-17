@@ -1,40 +1,31 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import styles from './ErrorBoundary.css';
 
 type Props = {
     children: ReactNode;
 };
 
 type State = {
+    isError: boolean;
     error?: Error;
-    errorInfo?: ErrorInfo;
+    info?: ErrorInfo;
 };
 
 export default class ErrorBoundary extends Component<Props, State> {
-    state: State = {};
+    state = { isError: false };
 
-    componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        this.setState({
-            error,
-            errorInfo,
-        });
+    static getDerivedStateFromError() {
+        return { isError: true };
+    }
+
+    componentDidCatch(error: Error, info: ErrorInfo) {
+        this.setState((state) => ({ ...state, error, info }));
     }
 
     render() {
-        const { error, errorInfo } = this.state;
-
-        if (!errorInfo) {
-            return this.props.children;
+        if (this.state.isError) {
+            return <h1>Что-то пошло не так</h1>;
         }
 
-        return (
-            <div>
-                <h2>Something went wrong.</h2>
-                <details className={styles.details}>
-                    {error && error.toString()}
-                    {errorInfo.componentStack}
-                </details>
-            </div>
-        );
+        return this.props.children;
     }
 }

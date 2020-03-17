@@ -9,10 +9,8 @@ describe('<ErrorBoundary />', () => {
         expect(getByText(/children/i)).toBeTruthy();
     });
 
-    it('should renders "Something went wrong." when an error is thrown', () => {
-        const spy = jest.spyOn(console, 'error');
-
-        spy.mockImplementation(() => {});
+    it('should renders "Что-то пошло не так" when an error is thrown', () => {
+        const spy = jest.spyOn(console, 'error').mockImplementation();
 
         const Throw = () => {
             throw new Error('bad');
@@ -24,7 +22,7 @@ describe('<ErrorBoundary />', () => {
             </ErrorBoundary>
         );
 
-        expect(getByText(/something went wrong./i)).toBeTruthy();
+        expect(getByText(/что-то пошло не так/i)).toBeTruthy();
 
         spy.mockRestore();
     });

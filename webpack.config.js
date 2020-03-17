@@ -147,6 +147,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist') + (isModern ? '/modern' : '/legacy'),
         filename: filename('js'),
+        publicPath: '/',
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -155,6 +156,7 @@ module.exports = {
     devServer: {
         port: 4200,
         hot: isDev,
+        historyApiFallback: true,
     },
     devtool: isDev ? 'source-map' : '',
     plugins: plugins(),
