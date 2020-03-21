@@ -22,7 +22,7 @@
         "start": "cross-env NODE_ENV=development BROWSERSLIST_ENV=modern webpack-dev-server --mode development --open",
         "start:legacy": "cross-env NODE_ENV=development BROWSERSLIST_ENV=legacy webpack-dev-server --mode development --open",
         "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json",
-        "test": "npm run jest && npm run lint",
+        "test": "npm run jest:coverage && npm run lint",
         "jest": "jest --verbose --passWithNoTests",
         "jest:watch": "npm run jest --watchAll",
         "jest:coverage": "jest --env=jsdom --coverage",
@@ -46,12 +46,16 @@
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged",
-            "pre-push": "npm run jest:coverage"
+            "pre-push": "npm run jest"
         }
     },
     "lint-staged": {
         "*.(js|ts|tsx)": [
-            "npm run lint",
+            "npm run lint:js",
+            "git add"
+        ],
+        "*.(css)": [
+            "npm run lint:css",
             "git add"
         ]
     },
