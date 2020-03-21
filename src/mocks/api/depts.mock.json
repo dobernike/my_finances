@@ -1,0 +1,25 @@
+{
+    "depts": [
+        {
+            "id": "1",
+            "whom": "Andrew",
+            "amount": 500,
+            "currency": "$",
+            "comment": "Just kidding"
+        },
+        {
+            "id": "2",
+            "whom": "Paul",
+            "amount": 1,
+            "currency": "rub",
+            "comment": "For real"
+        },
+        {
+            "id": "3",
+            "whom": "Cow",
+            "amount": 0,
+            "currency": "euro",
+            "comment": "yesterday I drunk "
+        }
+    ]
+}

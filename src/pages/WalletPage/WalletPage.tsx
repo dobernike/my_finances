@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import { RouteComponentProps } from '@reach/router';
 
-export default class WalletPage extends PureComponent<RouteComponentProps> {
+export default class WalletPage extends PureComponent {
     render() {
         return <h1>WalletPage</h1>;
     }

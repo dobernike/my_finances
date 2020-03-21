@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -7,7 +7,7 @@ import { render, fireEvent } from '@testing-library/react';
 import Header from '../Header';
 import reducer from '../../../store/reducers/rootReducer';
 
-const renderWithRedux = (ui: any, state = { auth: { isAuthenticated: true } }) => {
+const renderWithRedux = (ui: ReactNode, state = { auth: { isAuthenticated: true } }) => {
     const store = createStore(reducer, state);
 
     return {

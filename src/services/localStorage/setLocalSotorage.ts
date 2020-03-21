@@ -1,3 +1,5 @@
-export const setLocalStorage = (key: string, value: string) => {
-    localStorage.setItem(key, value);
+export const setLocalStorage = (key: string, value: object | string) => {
+    const stringifiedValue = JSON.stringify(value);
+
+    localStorage.setItem(key, stringifiedValue);
 };

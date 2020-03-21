@@ -1,19 +1,24 @@
 module.exports = {
     extends: [
         'airbnb',
-        'plugin:prettier/recommended',
         'prettier/react',
+        'prettier/@typescript-eslint',
+        'plugin:prettier/recommended',
+        'plugin:react/recommended',
         'plugin:sonarjs/recommended',
         'plugin:testing-library/recommended',
         'plugin:testing-library/react',
+        'plugin:@typescript-eslint/recommended',
     ],
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
     parserOptions: {
+        ecmaFeatures: 2020,
+        sourceType: 'module',
         ecmaFeatures: {
-            legacyDecorators: true,
+            jsx: true,
         },
     },
-    plugins: ['react', 'jsx-a11y', 'import', 'sonarjs', 'testing-library'],
+    plugins: ['react', 'jsx-a11y', 'import', 'sonarjs', 'testing-library', '@typescript-eslint'],
     env: {
         browser: true,
         node: true,
@@ -23,8 +28,7 @@ module.exports = {
         'import/parser': 'babel-eslint',
         'import/ignore': ['node_modules', 'plugins', '.(json|less|css|xml)$'],
         react: {
-            pragma: 'React',
-            version: '16.4.0',
+            version: 'detect',
         },
     },
     globals: {
@@ -33,6 +37,15 @@ module.exports = {
         react_disableWarnings: true,
         react_enableWarnings: true,
     },
+    overrides: [
+        {
+            files: ['*.ts', '*.tsx'],
+            rules: {
+                '@typescript-eslint/no-unused-vars': [2, { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+                '@typescript-eslint/explicit-function-return-type': 0,
+            },
+        },
+    ],
     rules: {
         curly: [2, 'all'],
         'testing-library/await-async-query': 'error',

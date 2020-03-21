@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import { RouteComponentProps } from '@reach/router';
 
-export default class StatisticPage extends PureComponent<RouteComponentProps> {
+export default class StatisticPage extends PureComponent {
     render() {
         return <h1>StatisticPage</h1>;
     }
