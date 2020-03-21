@@ -46,7 +46,7 @@
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged",
-            "pre-push": "npm run jest"
+            "pre-push": "npm run jest:coverage"
         }
     },
     "lint-staged": {
