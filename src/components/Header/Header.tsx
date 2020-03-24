@@ -31,7 +31,7 @@ class Header extends Component<Props, State> {
 
     render() {
         const { isAuthenticated } = this.props;
-        const routes = getRoutes(isAuthenticated);
+        const routes = getRoutes(isAuthenticated).filter((route) => route.label);
 
         return (
             <header className={styles.header}>
