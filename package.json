@@ -111,7 +111,7 @@
         "eslint-config-node": "^4.0.0",
         "eslint-config-prettier": "^6.10.1",
         "eslint-import-resolver-node": "^0.3.3",
-        "eslint-loader": "^3.0.4",
+        "eslint-loader": "^4.0.0",
         "eslint-plugin-import": "^2.20.2",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-node": "^11.1.0",
