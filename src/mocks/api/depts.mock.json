@@ -5,6 +5,7 @@
             "whom": "Andrew",
             "amount": 500,
             "currency": "$",
+            "date": "13.10.2014",
             "comment": "Just kidding"
         },
         {
@@ -12,6 +13,7 @@
             "whom": "Paul",
             "amount": 1,
             "currency": "rub",
+            "date": "01.04.2020",
             "comment": "For real"
         },
         {
@@ -19,7 +21,8 @@
             "whom": "Cow",
             "amount": 0,
             "currency": "euro",
-            "comment": "yesterday I drunk "
+            "date": "06.12.2016",
+            "comment": "yesterday I was drunk"
         }
     ]
 }

@@ -3,6 +3,7 @@ export type Dept = {
     whom: string;
     amount: number;
     currency: string;
+    date: string;
     comment: string;
 };
 
@@ -24,7 +25,6 @@ const initialState: DeptsState = {
 };
 
 export const deptsReducer = (state = initialState, action: FetchAction) => {
-    // eslint-disable-next-line sonarjs/no-small-switch
     switch (action.type) {
         case 'FETCH_DEPTS':
             return { ...state, depts: [...state.depts, ...action.payload] };

@@ -9,6 +9,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { fetchDepts } from '../../store/actions/fetchDepts';
 import { clearDepts } from '../../store/actions/clearDepts';
 import { deleteDept } from '../../store/actions/deleteDept';
+import Media from '../../hoc/Media';
 import styles from './DeptsPage.css';
 
 type Props = {
@@ -54,35 +55,54 @@ class DeptsPage extends Component<Props> {
             return <Loader />;
         }
 
+        const tableBody = (
+            <>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Кому</th>
+                        <th>Сумма</th>
+                        <th>Валюта</th>
+                        <Media.Desktop>
+                            <th>Дата</th>
+                        </Media.Desktop>
+                        <th>Комментарий</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody onClick={this.handleClick} role="presentation">
+                    {this.props.depts.map((dept) => (
+                        <tr key={dept.id} id={dept.id} className={styles.tr}>
+                            <th>{dept.id}</th>
+                            <td>{dept.whom}</td>
+                            <td>{dept.amount}</td>
+                            <td>{dept.currency}</td>
+                            <Media.Desktop>
+                                <td>{dept.date}</td>
+                            </Media.Desktop>
+                            <td>{dept.comment}</td>
+                            <td data-delete>X</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </>
+        );
+
         return (
             <>
                 <Button className={styles.add} onClick={this.handleAddDept}>
                     Добавить
                 </Button>
-                <Table hover size="xl" className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Кому</th>
-                            <th>Сумма</th>
-                            <th>Валюта</th>
-                            <th>Комментарий</th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody onClick={this.handleClick} role="presentation">
-                        {this.props.depts.map((dept) => (
-                            <tr key={dept.id} id={dept.id} className={styles.tr}>
-                                <th>{dept.id}</th>
-                                <td>{dept.whom}</td>
-                                <td>{dept.amount}</td>
-                                <td>{dept.currency}</td>
-                                <td>{dept.comment}</td>
-                                <td data-delete>X</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
+                <Media.Mobile>
+                    <Table hover size="sm" className={styles.table}>
+                        {tableBody}
+                    </Table>
+                </Media.Mobile>
+                <Media.DesktopOrTablet>
+                    <Table hover size="xl" className={styles.table}>
+                        {tableBody}
+                    </Table>
+                </Media.DesktopOrTablet>
             </>
         );
     }
