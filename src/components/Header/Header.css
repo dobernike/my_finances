@@ -15,7 +15,6 @@
     @media (--media-tablet) {
         height: 60px;
     }
-
     @media (--media-desktop) {
         margin: 0 auto;
         width: 1200px;
@@ -88,7 +87,7 @@
     color: var(--color-navigation-link);
     font-size: 20px;
     text-decoration: none;
-    transition: opacity .3s;
+    transition: opacity 0.3s;
 
     &:hover,
     &:focus {

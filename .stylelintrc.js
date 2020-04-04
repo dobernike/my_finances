@@ -1,17 +1,26 @@
 module.exports = {
-    _COMMENT:
-        "Убрать опцию 'severity': 'warning' у indentation, как поправят баг в stylelint и Less  https://github.com/stylelint/stylelint/issues/1149",
-    extends: 'stylelint-config-standard',
-    plugins: ['stylelint-order'],
+    extends: ['stylelint-config-recommended', 'stylelint-config-prettier', 'stylelint-prettier/recommended'],
+    plugins: ['stylelint-order', 'stylelint-prettier'],
     ignoreFiles: ['dist/', 'coverage/'],
     rules: {
+        'prettier/prettier': true,
+        'rule-empty-line-before': 'always',
+        'at-rule-empty-line-before': [
+            'always',
+            {
+                except: ['after-same-name', 'first-nested'],
+            },
+        ],
+        'declaration-empty-line-before': 'never',
+        'declaration-block-no-duplicate-properties': true,
+        'declaration-no-important': true,
         'declaration-block-no-redundant-longhand-properties': [
             true,
             {
                 ignoreShorthands: ['flex-flow'],
             },
         ],
-        'number-leading-zero': 'never',
+        'number-leading-zero': 'always',
         indentation: [
             4,
             {
@@ -26,6 +35,7 @@ module.exports = {
             },
         ],
         'selector-pseudo-class-case': null,
+        'property-blacklist': ['flex'],
         'property-no-unknown': [
             true,
             {
@@ -39,10 +49,29 @@ module.exports = {
             },
         ],
         'order/order': [
-            ['custom-properties', 'at-variables', 'declarations', 'at-rules', 'rules', 'less-mixins'],
-            {
-                severity: 'warning',
-            },
+            [
+                'declarations',
+                {
+                    type: 'at-rule',
+                    name: 'media',
+                },
+                {
+                    type: 'rule',
+                    selector: '^&::(before|after)',
+                },
+                {
+                    type: 'rule',
+                    selector: '^&:\\w',
+                },
+                {
+                    type: 'rule',
+                    selector: '^&_',
+                },
+                {
+                    type: 'rule',
+                    selector: '^.',
+                },
+            ],
         ],
         'order/properties-order': [
             [
