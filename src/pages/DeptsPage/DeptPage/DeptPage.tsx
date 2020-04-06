@@ -84,7 +84,7 @@ export default class DeptPage extends PureComponent<Props> {
                                     required
                                 />
 
-                                <Button type="submit" large disabled={isSubmitting}>
+                                <Button type="submit" className={styles.submit} large disabled={isSubmitting}>
                                     Добавить
                                 </Button>
                             </fieldset>
