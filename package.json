@@ -63,6 +63,7 @@
         "@blueprintjs/core": "^3.23.1",
         "babel-polyfill": "^6.26.0",
         "bootstrap": "^4.4.1",
+        "formik": "^2.1.4",
         "normalize.css": "^8.0.1",
         "react": "^16.13.1",
         "react-bootstrap": "^1.0.0",
