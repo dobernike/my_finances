@@ -12,7 +12,6 @@ import styles from './DeptsPage.css';
 type Props = {
     depts: Depts;
     fetchDepts: () => void;
-    clearDepts: () => void;
     deleteDept: (id: string) => void;
     history: { push: (to: string) => void };
     match: { path: string };
@@ -21,10 +20,6 @@ type Props = {
 class DeptsPage extends Component<Props> {
     componentDidMount() {
         this.props.fetchDepts();
-    }
-
-    componentWillUnmount() {
-        this.props.clearDepts();
     }
 
     handleAddDept = () => {
