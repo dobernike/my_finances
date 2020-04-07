@@ -10,11 +10,13 @@ export const fetchDepts = () => {
         try {
             dispatch(showLoader());
 
-            if (!getLocalStorage('deptsData')) {
+            const storage = getLocalStorage('deptsData');
+
+            if (!storage) {
                 setLocalStorage('deptsData', depts.depts);
             }
 
-            const payload = getLocalStorage('deptsData');
+            const payload = storage;
 
             dispatch({ type: 'FETCH_DEPTS', payload });
             dispatch(hideLoader());
