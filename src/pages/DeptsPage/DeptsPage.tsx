@@ -4,17 +4,13 @@ import { Button } from '@blueprintjs/core';
 import { connect } from 'react-redux';
 import { RootState } from '../../store/reducers/rootReducer';
 import { Depts } from '../../store/reducers/deptsReducer';
-import { Loading } from '../../store/reducers/appReducer';
-import { Loader } from '../../components/Loader/Loader';
 import { fetchDepts } from '../../store/actions/fetchDepts';
-import { clearDepts } from '../../store/actions/clearDepts';
 import { deleteDept } from '../../store/actions/deleteDept';
 import Media from '../../hoc/Media';
 import styles from './DeptsPage.css';
 
 type Props = {
     depts: Depts;
-    loading: Loading;
     fetchDepts: () => void;
     clearDepts: () => void;
     deleteDept: (id: string) => void;
@@ -51,10 +47,6 @@ class DeptsPage extends Component<Props> {
     };
 
     render() {
-        if (this.props.loading) {
-            return <Loader />;
-        }
-
         const tableBody = (
             <>
                 <thead>
@@ -108,8 +100,7 @@ class DeptsPage extends Component<Props> {
     }
 }
 
-export default connect((state: RootState) => ({ depts: state.depts.depts, loading: state.app.loading }), {
+export default connect((state: RootState) => ({ depts: state.depts.depts }), {
     fetchDepts,
-    clearDepts,
     deleteDept,
 })(DeptsPage);

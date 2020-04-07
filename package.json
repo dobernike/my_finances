@@ -50,12 +50,8 @@
         }
     },
     "lint-staged": {
-        "*.(js|ts|tsx)": [
-            "npm run lint:js",
-            "git add"
-        ],
-        "*.(css)": [
-            "npm run lint:css",
+        "*.(js|jsx|ts|tsx|css)": [
+            "npm run lint",
             "git add"
         ]
     },
