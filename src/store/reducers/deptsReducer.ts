@@ -27,7 +27,7 @@ const initialState: DeptsState = {
 export const deptsReducer = (state = initialState, action: FetchAction) => {
     switch (action.type) {
         case 'FETCH_DEPTS':
-            return { ...state, depts: [...state.depts, ...action.payload] };
+            return { ...state, depts: [...action.payload] };
         case 'DELETE_DEPT':
             return { ...state, depts: [...action.payload] };
         default:
