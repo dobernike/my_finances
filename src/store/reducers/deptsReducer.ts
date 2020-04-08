@@ -1,7 +1,7 @@
 export type Dept = {
     id: string;
     whom: string;
-    amount: number;
+    amount: string;
     currency: string;
     date: string;
     comment: string;
@@ -28,6 +28,8 @@ export const deptsReducer = (state = initialState, action: FetchAction) => {
     switch (action.type) {
         case 'FETCH_DEPTS':
             return { ...state, depts: [...action.payload] };
+        case 'ADD_DEPT':
+            return { ...state, depts: [...state.depts, action.payload] };
         case 'DELETE_DEPT':
             return { ...state, depts: [...action.payload] };
         default:

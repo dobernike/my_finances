@@ -3,26 +3,34 @@
         {
             "id": "1",
             "whom": "Andrew",
-            "amount": 500,
-            "currency": "$",
-            "date": "13.10.2014",
+            "amount": "500",
+            "currency": "USD",
+            "date": "2014-10-13",
             "comment": "Just kidding"
         },
         {
             "id": "2",
             "whom": "Paul",
-            "amount": 1,
-            "currency": "rub",
-            "date": "01.04.2020",
+            "amount": "1",
+            "currency": "RUB",
+            "date": "2020-04-01",
             "comment": "For real"
         },
         {
             "id": "3",
             "whom": "Cow",
-            "amount": 0,
-            "currency": "euro",
-            "date": "06.12.2016",
+            "amount": "0",
+            "currency": "EUR",
+            "date": "2016-12-06",
             "comment": "yesterday I was drunk"
+        },
+        {
+            "id": "4",
+            "whom": "Dog",
+            "amount": "2",
+            "currency": "BYN",
+            "date": "2016-12-07",
+            "comment": "for food"
         }
     ]
 }

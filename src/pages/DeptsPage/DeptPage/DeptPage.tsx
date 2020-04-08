@@ -1,36 +1,80 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { Button, InputGroup, Classes } from '@blueprintjs/core';
+import { Button, InputGroup, Classes, H1 } from '@blueprintjs/core';
+import { Loader } from '../../../components/Loader/Loader';
+import { addDept } from '../../../store/actions/addDept';
+import { getDept } from '../../../store/actions/getDept';
+import { Dept } from '../../../store/reducers/deptsReducer';
 import styles from './DeptPage.css';
 
+function randomInteger(min: number, max: number) {
+    // случайное число от min до (max+1)
+    const rand = min + Math.random() * (max + 1 - min);
+
+    return Math.floor(rand);
+}
+
 type Props = {
-    deptId: string;
+    history: { goBack: () => void };
+    match: { params: { deptId: string } };
+    addDept: (newDept: Dept) => void;
+    getDept: (id: string) => Dept;
 };
 
-export default class DeptPage extends PureComponent<Props> {
+type State = {
+    dept?: Dept;
+};
+
+class DeptPage extends Component<Props, State> {
+    state: State = { dept: null };
+
+    componentDidMount() {
+        const { deptId } = this.props.match.params;
+
+        if (deptId !== 'new') {
+            const dept = getDept(deptId);
+
+            this.setState({ dept });
+        }
+    }
+
     render() {
+        const { deptId } = this.props.match.params;
+        const { dept } = this.state;
+
+        if (deptId !== 'new' && dept === null) {
+            return <Loader />;
+        }
+
+        if (dept === undefined) {
+            return <H1>Такой записи не существует</H1>;
+        }
+
         const today = new Date().toISOString().substr(0, 10);
 
         return (
             <>
                 <Formik
                     initialValues={{
-                        whom: '',
-                        amount: '',
-                        currency: 'RUB',
-                        date: today,
-                        comment: '',
+                        id: dept ? dept.id : `${randomInteger(4, 99)}`,
+                        whom: dept ? dept.whom : '',
+                        amount: dept ? dept.amount : '',
+                        currency: dept ? dept.currency : 'RUB',
+                        date: dept ? dept.date : today,
+                        comment: dept ? dept.comment : '',
                     }}
                     onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                        }, 400);
+                        this.props.addDept(values);
+                        setSubmitting(false);
+                        this.props.history.goBack();
                     }}>
                     {({ values, handleChange, handleSubmit, isSubmitting }) => (
                         <form onSubmit={handleSubmit} className={styles.form}>
                             <fieldset className={styles.fieldset}>
-                                <legend className={styles.legend}>Personal Information:</legend>
+                                <legend className={styles.legend}>
+                                    {dept ? `Обновить данные:` : `Создать новую запись:`}
+                                </legend>
                                 <InputGroup
                                     name="whom"
                                     className={styles.item}
@@ -85,7 +129,7 @@ export default class DeptPage extends PureComponent<Props> {
                                 />
 
                                 <Button type="submit" className={styles.submit} large disabled={isSubmitting}>
-                                    Добавить
+                                    {dept ? `Обновить` : `Добавить`}
                                 </Button>
                             </fieldset>
                         </form>
@@ -95,3 +139,5 @@ export default class DeptPage extends PureComponent<Props> {
         );
     }
 }
+
+export default connect(null, { addDept })(DeptPage);
