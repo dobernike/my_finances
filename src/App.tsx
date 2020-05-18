@@ -1,28 +1,20 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import Layout from './hoc/Layout/Layout';
-import { RootState } from './store/reducers/rootReducer';
+
+import { Layout } from './components/layout/layout.component';
+
 import { getRouting } from './routes';
-import './constants/colors.css';
+
+import { RootState } from './redux/root-reducer';
 
 type Props = {
     isAuthenticated: boolean;
 };
 
-class App extends PureComponent<Props> {
+class AppContainer extends React.PureComponent<Props> {
     render() {
-        const routing = getRouting(this.props.isAuthenticated);
-
-        return (
-            <ErrorBoundary>
-                <Router>
-                    <Layout>{routing}</Layout>
-                </Router>
-            </ErrorBoundary>
-        );
+        return <Layout>{getRouting(this.props.isAuthenticated)}</Layout>;
     }
 }
 
-export default connect((state: RootState) => ({ isAuthenticated: state.auth.isAuthenticated }))(App);
+export const App = connect((state: RootState) => ({ isAuthenticated: state.auth.isAuthenticated }))(AppContainer);

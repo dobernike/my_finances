@@ -1,12 +1,14 @@
 import React, { Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Loader } from './components/Loader/Loader';
-const SettingsPage = lazy(() => import('./pages/SettingsPage/SettingsPage'));
-const StatisticPage = lazy(() => import('./pages/StatisticPage/StatisticPage'));
-const WalletPage = lazy(() => import('./pages/WalletPage/WalletPage'));
-const OperationsPage = lazy(() => import('./pages/OperationsPage/OperationsPage'));
-const DeptsPage = lazy(() => import('./pages/DeptsPage/DeptsPage'));
-const DeptPage = lazy(() => import('./pages/DeptsPage/DeptPage/DeptPage'));
+
+import { Loader } from './components/loader/loader.component';
+
+const SettingsPage = lazy(() => import('./pages/settings/settings.component'));
+const StatisticPage = lazy(() => import('./pages/statistic/statistic.component'));
+const WalletPage = lazy(() => import('./pages/wallet/wallet.component'));
+const OperationsPage = lazy(() => import('./pages/operations/operations.component'));
+const DeptsPage = lazy(() => import('./pages/depts/depts.component'));
+const DeptPage = lazy(() => import('./pages/dept/dept.component'));
 
 export const getRoutes = (isAuthenticated: boolean) => {
     return isAuthenticated
