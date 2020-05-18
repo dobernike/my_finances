@@ -1,3 +1,5 @@
+import { AuthActionTypes } from './auth.types';
+
 import { storage } from '../../services/storage';
 
 export type AuthState = {
@@ -20,9 +22,9 @@ export const initialState: AuthState = {
 
 export const authReducer = (state = initialState, action: AuthAction) => {
     switch (action.type) {
-        case 'LOG_IN':
+        case AuthActionTypes.LOG_IN:
             return { ...state, isAuthenticated: true };
-        case 'LOG_OUT':
+        case AuthActionTypes.LOG_OUT:
             return { ...state, isAuthenticated: false };
         default:
             return state;

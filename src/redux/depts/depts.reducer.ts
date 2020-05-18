@@ -1,3 +1,5 @@
+import { DeptsActionTypes } from './depts.types';
+
 export type Dept = {
     id: string;
     whom: string;
@@ -26,11 +28,11 @@ const initialState: DeptsState = {
 
 export const deptsReducer = (state = initialState, action: FetchAction) => {
     switch (action.type) {
-        case 'FETCH_DEPTS':
+        case DeptsActionTypes.FETCH_DEPTS:
             return { ...state, depts: [...action.payload] };
-        case 'ADD_DEPT':
+        case DeptsActionTypes.ADD_DEPT:
             return { ...state, depts: [...state.depts, action.payload] };
-        case 'DELETE_DEPT':
+        case DeptsActionTypes.DELETE_DEPT:
             return { ...state, depts: [...action.payload] };
         default:
             return state;

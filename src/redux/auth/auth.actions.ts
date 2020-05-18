@@ -1,15 +1,17 @@
 // import { Dispatch } from 'redux';
 // import { getLocalStorage } from '../../services/localStorage/getLocalStorage';
+import { AuthActionTypes } from './auth.types';
+
 import { storage } from '../../services/storage';
 
 export const logIn = () => {
     storage('userData', 'login');
-    return { type: 'LOG_IN' };
+    return { type: AuthActionTypes.LOG_IN };
 };
 
 export const logOut = () => {
     storage('userData', 'logout');
-    return { type: 'LOG_OUT' };
+    return { type: AuthActionTypes.LOG_OUT };
 };
 
 // export const setAuth = () => {

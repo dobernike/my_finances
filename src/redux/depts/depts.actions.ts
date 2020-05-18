@@ -1,8 +1,10 @@
 import { Dispatch } from 'redux';
 
-import { Dept } from '../depts/depts.reducer';
+import { DeptsActionTypes } from './depts.types';
 
 import { storage } from '../../services/storage';
+
+import { Dept } from '../depts/depts.reducer';
 
 import depts from '../../mocks/api/depts.mock.json';
 
@@ -11,7 +13,7 @@ export const addDept = (newDept: Dept) => {
 
     depts.push(newDept);
     storage('deptsData', depts);
-    return { type: 'ADD_DEPT', payload: newDept };
+    return { type: DeptsActionTypes.ADD_DEPT, payload: newDept };
 };
 
 export const deleteDept = (id: string) => {
@@ -19,7 +21,7 @@ export const deleteDept = (id: string) => {
     const updatedDepts = depts.filter((dept: Dept) => dept.id !== id);
 
     storage('deptsData', updatedDepts);
-    return { type: 'DELETE_DEPT', payload: updatedDepts };
+    return { type: DeptsActionTypes.DELETE_DEPT, payload: updatedDepts };
 };
 
 export const fetchDepts = () => {
@@ -30,7 +32,7 @@ export const fetchDepts = () => {
 
         const payload = storage('deptsData');
 
-        dispatch({ type: 'FETCH_DEPTS', payload });
+        dispatch({ type: DeptsActionTypes.FETCH_DEPTS, payload });
     };
 };
 
