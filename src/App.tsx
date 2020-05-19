@@ -11,10 +11,10 @@ type Props = {
     isAuthenticated: boolean;
 };
 
-class AppContainer extends React.PureComponent<Props> {
+class AppComponent extends React.PureComponent<Props> {
     render() {
         return <Layout>{getRouting(this.props.isAuthenticated)}</Layout>;
     }
 }
 
-export const App = connect((state: RootState) => ({ isAuthenticated: state.auth.isAuthenticated }))(AppContainer);
+export const App = connect((state: RootState) => ({ isAuthenticated: state.auth.isAuthenticated }))(AppComponent);

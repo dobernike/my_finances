@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 
-import { Header } from './header.component';
+import { HeaderContainer } from './header.container';
 
 import { rootReducer } from '../../redux/root-reducer';
 
@@ -24,19 +24,19 @@ const renderWithRedux = (ui: ReactNode, state = { auth: { isAuthenticated: true 
 
 describe('<Header />', () => {
     it('should renders "Выйти" with state isAuthenticated equal false', () => {
-        const { getByText } = renderWithRedux(<Header />);
+        const { getByText } = renderWithRedux(<HeaderContainer />);
 
         expect(getByText(/выйти/i)).toBeTruthy();
     });
 
     it('should renders "Войти" with state isAuthenticated equal false', () => {
-        const { getByText } = renderWithRedux(<Header />, { auth: { isAuthenticated: false } });
+        const { getByText } = renderWithRedux(<HeaderContainer />, { auth: { isAuthenticated: false } });
 
         expect(getByText(/войти/i)).toBeTruthy();
     });
 
     it('should renders nav menu with state isAuthenticated equal true', () => {
-        const { getAllByText } = renderWithRedux(<Header />);
+        const { getAllByText } = renderWithRedux(<HeaderContainer />);
 
         expect(getAllByText(/долги/i)).toBeTruthy();
         expect(getAllByText(/операции/i)).toBeTruthy();
@@ -46,7 +46,7 @@ describe('<Header />', () => {
     });
 
     it('should not renders nav menu with state isAuthenticated equal false', () => {
-        const { queryByText } = renderWithRedux(<Header />, { auth: { isAuthenticated: false } });
+        const { queryByText } = renderWithRedux(<HeaderContainer />, { auth: { isAuthenticated: false } });
 
         expect(queryByText(/долги/i)).toBeFalsy();
         expect(queryByText(/операции/i)).toBeFalsy();
@@ -56,7 +56,7 @@ describe('<Header />', () => {
     });
 
     it('should hide "настройки" when "выйти" button clicked', () => {
-        const { getByText, getAllByText, queryByText } = renderWithRedux(<Header />);
+        const { getByText, getAllByText, queryByText } = renderWithRedux(<HeaderContainer />);
 
         expect(getByText(/выйти/i)).toBeTruthy();
         expect(getAllByText(/настройки/i)).toBeTruthy();
@@ -67,7 +67,7 @@ describe('<Header />', () => {
     });
 
     it('should show "настройки" when "войти" button clicked', () => {
-        const { getByText, getAllByText, queryByText } = renderWithRedux(<Header />, {
+        const { getByText, getAllByText, queryByText } = renderWithRedux(<HeaderContainer />, {
             auth: { isAuthenticated: false },
         });
 
@@ -79,7 +79,7 @@ describe('<Header />', () => {
     });
 
     it('should show drawer with "small-cross" when menu button clicked', () => {
-        const { container, getByText, queryByText } = renderWithRedux(<Header />);
+        const { container, getByText, queryByText } = renderWithRedux(<HeaderContainer />);
         const menuButton = container.querySelector('.menuButton');
 
         expect(queryByText(/small-cross/i)).toBeFalsy();

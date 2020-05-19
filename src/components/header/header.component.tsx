@@ -2,13 +2,10 @@ import React from 'react';
 import cx from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { Drawer, Button } from '@blueprintjs/core';
-import { connect } from 'react-redux';
 
-import { AuthButton } from '../auth-button/auth-button.component';
+import { AuthButtonContainer } from '../auth-button/auth-button.container';
 
 import { getRoutes } from '../../routes';
-
-import { RootState } from '../../redux/root-reducer';
 
 import styles from './header.styles.css';
 
@@ -20,7 +17,7 @@ type State = {
     isMenuOpened: boolean;
 };
 
-class HeaderComponent extends React.Component<Props, State> {
+export class Header extends React.Component<Props, State> {
     state = {
         isMenuOpened: false,
     };
@@ -81,7 +78,7 @@ class HeaderComponent extends React.Component<Props, State> {
                             </ul>
                         </nav>
                     </div>
-                    <AuthButton />
+                    <AuthButtonContainer />
                 </div>
                 <div className={styles.bottomNavigation}>
                     <nav className={styles.navigation}>
@@ -107,5 +104,3 @@ class HeaderComponent extends React.Component<Props, State> {
         );
     }
 }
-
-export const Header = connect((state: RootState) => ({ isAuthenticated: state.auth.isAuthenticated }))(HeaderComponent);

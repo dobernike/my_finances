@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Header } from '../header/header.component';
+import { HeaderContainer } from '../header/header.container';
 
 import styles from './layout.styles.css';
 
@@ -12,7 +12,7 @@ export class Layout extends React.PureComponent<Props> {
     render() {
         return (
             <div className={styles.layout}>
-                <Header />
+                <HeaderContainer />
                 <main className={styles.main}>{this.props.children}</main>
             </div>
         );
