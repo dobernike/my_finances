@@ -13,7 +13,10 @@ export const addDept = (newDept: Dept) => {
 
     depts.push(newDept);
     storage('deptsData', depts);
-    return { type: DeptsActionTypes.ADD_DEPT, payload: newDept };
+    return {
+        type: DeptsActionTypes.ADD_DEPT,
+        payload: newDept,
+    };
 };
 
 export const deleteDept = (id: string) => {

@@ -7,10 +7,10 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { HeaderContainer } from './header.container';
 
-import { rootReducer } from '../../redux/root-reducer';
+import { persistedReducer } from '../../redux/root-reducer';
 
 const renderWithRedux = (ui: ReactNode, state = { auth: { isAuthenticated: true } }) => {
-    const store = createStore(rootReducer, state);
+    const store = createStore(persistedReducer, state);
 
     return {
         ...render(

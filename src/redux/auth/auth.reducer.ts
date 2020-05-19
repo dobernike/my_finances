@@ -1,7 +1,5 @@
 import { AuthActionTypes } from './auth.types';
 
-import { storage } from '../../services/storage';
-
 export type AuthState = {
     isAuthenticated: boolean;
 };
@@ -17,7 +15,7 @@ type LogOutAction = {
 export type AuthAction = LogInAction | LogOutAction;
 
 export const initialState: AuthState = {
-    isAuthenticated: storage('userData') === 'login',
+    isAuthenticated: false,
 };
 
 export const authReducer = (state = initialState, action: AuthAction) => {
