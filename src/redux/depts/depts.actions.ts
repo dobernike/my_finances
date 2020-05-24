@@ -2,20 +2,26 @@ import { Dispatch } from 'redux';
 
 import { DeptsActionTypes } from './depts.types';
 
+import { http } from '../../utils/http';
+
 import { storage } from '../../services/storage';
 
 import { Dept } from '../depts/depts.reducer';
 
-import depts from '../../mocks/api/depts.mock.json';
+export const addDept = async (newDept: Dept) => {
+    return async (dispatch: Dispatch) => {
+        try {
+            await http('http://localhost:3001/user-depts', 'POST', newDept);
 
-export const addDept = (newDept: Dept) => {
-    const depts = storage('deptsData');
-
-    depts.push(newDept);
-    storage('deptsData', depts);
-    return {
-        type: DeptsActionTypes.ADD_DEPT,
-        payload: newDept,
+            dispatch({
+                type: DeptsActionTypes.ADD_DEPT,
+                payload: newDept,
+            });
+        } catch {
+            dispatch({
+                type: 'DEFAULT',
+            });
+        }
     };
 };
 
@@ -28,19 +34,12 @@ export const deleteDept = (id: string) => {
 };
 
 export const fetchDepts = () => {
-    return (dispatch: Dispatch) => {
-        if (!storage('deptsData')) {
-            storage('deptsData', depts.depts);
-        }
+    return async (dispatch: Dispatch) => {
+        const depts = await http('http://localhost:3001/user-depts');
 
-        const payload = storage('deptsData');
-
-        dispatch({ type: DeptsActionTypes.FETCH_DEPTS, payload });
+        dispatch({
+            type: DeptsActionTypes.FETCH_DEPTS,
+            payload: depts,
+        });
     };
-};
-
-export const getDept = (id: string) => {
-    const depts = storage('deptsData');
-
-    return depts.find((dept: Dept) => dept.id === id);
 };

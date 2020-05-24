@@ -8,7 +8,7 @@ import { deptsReducer, DeptsState } from './depts/depts.reducer';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth', 'depts'],
+    whitelist: ['auth'],
 };
 
 export type RootState = {

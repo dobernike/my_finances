@@ -1,0 +1,60 @@
+{
+  "user-depts": [
+    {
+      "id": "1",
+      "whom": "Andrew",
+      "amount": "500",
+      "currency": "USD",
+      "date": "2014-10-13",
+      "comment": "Just kidding"
+    },
+    {
+      "id": "2",
+      "whom": "Paul",
+      "amount": "1",
+      "currency": "RUB",
+      "date": "2020-04-01",
+      "comment": "For real"
+    },
+    {
+      "id": "3",
+      "whom": "Cow",
+      "amount": "0",
+      "currency": "EUR",
+      "date": "2016-12-06",
+      "comment": "yesterday I was drunk"
+    },
+    {
+      "id": "4",
+      "whom": "Dog",
+      "amount": "2",
+      "currency": "BYN",
+      "date": "2016-12-07",
+      "comment": "for food"
+    },
+    {
+      "id": "5",
+      "whom": "Cat",
+      "amount": "1",
+      "currency": "BYN",
+      "date": "2016-12-08",
+      "comment": "meow"
+    },
+    {
+      "id": "45",
+      "whom": "Ted",
+      "amount": "500",
+      "currency": "USD",
+      "date": "2020-05-24",
+      "comment": "HIMYM"
+    },
+    {
+      "id": "79",
+      "whom": "Bear",
+      "amount": "1",
+      "currency": "RUB",
+      "date": "2020-05-24",
+      "comment": "honey"
+    }
+  ]
+}

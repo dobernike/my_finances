@@ -21,7 +21,9 @@ type Props = {
 
 class DeptsPage extends React.Component<Props> {
     componentDidMount() {
-        this.props.fetchDepts();
+        if (!this.props.depts.length) {
+            this.props.fetchDepts();
+        }
     }
 
     handleAddDept = () => {

@@ -5,7 +5,8 @@ import { Button, InputGroup, Classes, H1 } from '@blueprintjs/core';
 
 import { Loader } from '../../components/loader/loader.component';
 
-import { addDept, getDept } from '../../redux/depts/depts.actions';
+import { addDept } from '../../redux/depts/depts.actions';
+import { getDept } from '../../redux/depts/depts.utils';
 import { Dept } from '../../redux/depts/depts.reducer';
 
 import styles from './dept.styles.css';
@@ -31,11 +32,11 @@ type State = {
 class DeptPage extends React.Component<Props, State> {
     state: State = { dept: null };
 
-    componentDidMount() {
+    async componentDidMount() {
         const { deptId } = this.props.match.params;
 
         if (deptId !== 'new') {
-            const dept = getDept(deptId);
+            const dept = await getDept(deptId);
 
             this.setState({ dept });
         }
