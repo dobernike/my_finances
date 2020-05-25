@@ -1,5 +1,6 @@
 export const DeptsActionTypes = {
+    FETCH_DEPTS: 'FETCH_DEPTS',
     ADD_DEPT: 'ADD_DEPT',
     DELETE_DEPT: 'DELETE_DEPT',
-    FETCH_DEPTS: 'FETCH_DEPTS',
+    UPDATE_DEPT: 'UPDATE_DEPT',
 };

@@ -5,7 +5,7 @@ import { Button, InputGroup, Classes, H1 } from '@blueprintjs/core';
 
 import { Loader } from '../../components/loader/loader.component';
 
-import { addDept } from '../../redux/depts/depts.actions';
+import { addDept, updateDept } from '../../redux/depts/depts.actions';
 import { getDept } from '../../redux/depts/depts.utils';
 import { Dept } from '../../redux/depts/depts.reducer';
 
@@ -22,6 +22,7 @@ type Props = {
     history: { goBack(): void };
     match: { params: { deptId: string } };
     addDept(newDept: Dept): void;
+    updateDept(updatedDept: Dept): void;
     getDept(id: string): Dept;
 };
 
@@ -60,7 +61,7 @@ class DeptPage extends React.Component<Props, State> {
             <>
                 <Formik
                     initialValues={{
-                        id: dept ? dept.id : `${randomInteger(4, 99)}`,
+                        id: dept ? dept.id : `${randomInteger(4, 9999)}`,
                         whom: dept ? dept.whom : '',
                         amount: dept ? dept.amount : '',
                         currency: dept ? dept.currency : 'RUB',
@@ -68,7 +69,8 @@ class DeptPage extends React.Component<Props, State> {
                         comment: dept ? dept.comment : '',
                     }}
                     onSubmit={(values, { setSubmitting }) => {
-                        this.props.addDept(values);
+                        deptId === 'new' ? this.props.addDept(values) : this.props.updateDept(values);
+
                         setSubmitting(false);
                         this.props.history.goBack();
                     }}>
@@ -143,4 +145,4 @@ class DeptPage extends React.Component<Props, State> {
     }
 }
 
-export default connect(null, { addDept })(DeptPage);
+export default connect(null, { addDept, updateDept })(DeptPage);
