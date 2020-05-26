@@ -2,22 +2,22 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { authReducer, AuthState } from './auth/auth.reducer';
+import { userReducer, UserState } from './user/user.reducer';
 import { deptsReducer, DeptsState } from './depts/depts.reducer';
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth'],
+    whitelist: ['user'],
 };
 
 export type RootState = {
-    auth: AuthState;
+    user: UserState;
     depts: DeptsState;
 };
 
 const rootReducer = combineReducers({
-    auth: authReducer,
+    user: userReducer,
     depts: deptsReducer,
 });
 

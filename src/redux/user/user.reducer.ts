@@ -1,6 +1,6 @@
-import { AuthActionTypes } from './auth.types';
+import { UserActionTypes } from './user.types';
 
-export type AuthState = {
+export type UserState = {
     isAuthenticated: boolean;
 };
 
@@ -12,17 +12,17 @@ type LogOutAction = {
     type: string;
 };
 
-export type AuthAction = LogInAction | LogOutAction;
+export type UserAction = LogInAction | LogOutAction;
 
-export const initialState: AuthState = {
+export const initialState: UserState = {
     isAuthenticated: false,
 };
 
-export const authReducer = (state = initialState, action: AuthAction) => {
+export const userReducer = (state = initialState, action: UserAction) => {
     switch (action.type) {
-        case AuthActionTypes.LOG_IN:
+        case UserActionTypes.LOG_IN:
             return { ...state, isAuthenticated: true };
-        case AuthActionTypes.LOG_OUT:
+        case UserActionTypes.LOG_OUT:
             return { ...state, isAuthenticated: false };
         default:
             return state;

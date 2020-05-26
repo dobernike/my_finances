@@ -9,7 +9,7 @@ import { HeaderContainer } from './header.container';
 
 import { persistedReducer } from '../../redux/root-reducer';
 
-const renderWithRedux = (ui: ReactNode, state = { auth: { isAuthenticated: true } }) => {
+const renderWithRedux = (ui: ReactNode, state = { user: { isAuthenticated: true } }) => {
     const store = createStore(persistedReducer, state);
 
     return {
@@ -30,7 +30,7 @@ describe('<Header />', () => {
     });
 
     it('should renders "Войти" with state isAuthenticated equal false', () => {
-        const { getByText } = renderWithRedux(<HeaderContainer />, { auth: { isAuthenticated: false } });
+        const { getByText } = renderWithRedux(<HeaderContainer />, { user: { isAuthenticated: false } });
 
         expect(getByText(/войти/i)).toBeTruthy();
     });
@@ -46,7 +46,7 @@ describe('<Header />', () => {
     });
 
     it('should not renders nav menu with state isAuthenticated equal false', () => {
-        const { queryByText } = renderWithRedux(<HeaderContainer />, { auth: { isAuthenticated: false } });
+        const { queryByText } = renderWithRedux(<HeaderContainer />, { user: { isAuthenticated: false } });
 
         expect(queryByText(/долги/i)).toBeFalsy();
         expect(queryByText(/операции/i)).toBeFalsy();
@@ -68,7 +68,7 @@ describe('<Header />', () => {
 
     it('should show "настройки" when "войти" button clicked', () => {
         const { getByText, getAllByText, queryByText } = renderWithRedux(<HeaderContainer />, {
-            auth: { isAuthenticated: false },
+            user: { isAuthenticated: false },
         });
 
         expect(queryByText(/настройки/i)).toBeFalsy();

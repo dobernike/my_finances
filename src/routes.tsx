@@ -7,8 +7,8 @@ const SettingsPage = lazy(() => import('./pages/settings/settings.component'));
 const StatisticPage = lazy(() => import('./pages/statistic/statistic.component'));
 const WalletPage = lazy(() => import('./pages/wallet/wallet.component'));
 const OperationsPage = lazy(() => import('./pages/operations/operations.component'));
-const DeptsPage = lazy(() => import('./pages/depts/depts.component'));
-const DeptPage = lazy(() => import('./pages/dept/dept.component'));
+const DeptsPage = lazy(() => import('./pages/depts/depts.container'));
+const DeptPage = lazy(() => import('./pages/dept/dept.container'));
 
 export const getRoutes = (isAuthenticated: boolean) => {
     return isAuthenticated

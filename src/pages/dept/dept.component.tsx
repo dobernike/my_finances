@@ -1,11 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Button, InputGroup, Classes, H1 } from '@blueprintjs/core';
 
 import { Loader } from '../../components/loader/loader.component';
 
-import { addDept, updateDept } from '../../redux/depts/depts.actions';
 import { getDept } from '../../redux/depts/depts.utils';
 import { Dept } from '../../redux/depts/depts.reducer';
 
@@ -30,7 +28,7 @@ type State = {
     dept?: Dept;
 };
 
-class DeptPage extends React.Component<Props, State> {
+export class DeptPage extends React.Component<Props, State> {
     state: State = { dept: null };
 
     async componentDidMount() {
@@ -144,5 +142,3 @@ class DeptPage extends React.Component<Props, State> {
         );
     }
 }
-
-export default connect(null, { addDept, updateDept })(DeptPage);

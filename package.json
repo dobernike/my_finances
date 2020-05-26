@@ -32,7 +32,10 @@
         "lint:js": "tsc --noEmit && eslint --fix src/**/*.{js,ts,tsx}",
         "lint:css": "stylelint --formatter=verbose src/**/*.css",
         "prettier:js": "prettier --write src/**/*.js",
-        "prettier:css": "prettier --write src/**/*.css"
+        "prettier:css": "prettier --write src/**/*.css",
+        "precommit": "lint-staged",
+        "prepush": "npm run jest:coverage"
+
     },
     "browserslist": {
         "legacy": [
@@ -44,12 +47,6 @@
             "last 1 Firefox version",
             "last 1 Safari version"
         ]
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged",
-            "pre-push": "npm run jest:coverage"
-        }
     },
     "lint-staged": {
         "*.(js|jsx|ts|tsx)": [

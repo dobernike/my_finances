@@ -1,13 +1,10 @@
 import React, { MouseEvent } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Button } from '@blueprintjs/core';
-import { connect } from 'react-redux';
 
 import { Media } from '../../components/media/media.component';
 
 import { Depts } from '../../redux/depts/depts.reducer';
-import { fetchDepts, deleteDept } from '../../redux/depts/depts.actions';
-import { RootState } from '../../redux/root-reducer';
 
 import styles from './depts.styles.css';
 
@@ -19,7 +16,7 @@ type Props = {
     deleteDept(id: string): void;
 };
 
-class DeptsPage extends React.Component<Props> {
+export class DeptsPage extends React.Component<Props> {
     componentDidMount() {
         if (!this.props.depts.length) {
             this.props.fetchDepts();
@@ -98,8 +95,3 @@ class DeptsPage extends React.Component<Props> {
         );
     }
 }
-
-export default connect((state: RootState) => ({ depts: state.depts.depts }), {
-    fetchDepts,
-    deleteDept,
-})(DeptsPage);

@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import { RootState } from 'src/redux/root-reducer';
+
+import { RootState } from '../../redux/root-reducer';
 
 import { Header } from './header.component';
 
 const mapStateToProps = (state: RootState) => ({
-    isAuthenticated: state.auth.isAuthenticated,
+    isAuthenticated: state.user.isAuthenticated,
 });
 
 export const HeaderContainer = connect(mapStateToProps)(Header);

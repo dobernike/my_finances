@@ -18,7 +18,7 @@ export type DeptsState = {
 
 type FetchDeptsAction = {
     type: string;
-    payload: Depts & string;
+    payload: Depts & Dept & string;
 };
 
 type FetchAction = FetchDeptsAction;
