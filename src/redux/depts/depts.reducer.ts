@@ -28,19 +28,15 @@ const initialState: DeptsState = {
 };
 
 export const deptsReducer = (state = initialState, action: FetchAction) => {
-    let depts: Depts;
-
     switch (action.type) {
         case DeptsActionTypes.FETCH_DEPTS:
             return { ...state, depts: [...action.payload] };
         case DeptsActionTypes.ADD_DEPT:
             return { ...state, depts: [...state.depts, action.payload] };
         case DeptsActionTypes.DELETE_DEPT:
-            depts = getFilteredDepts(state.depts, action.payload);
-            return { ...state, depts };
+            return { ...state, depts: getFilteredDepts(state.depts, action.payload) };
         case DeptsActionTypes.UPDATE_DEPT:
-            depts = getUpdatedDepts(state.depts, action.payload);
-            return { ...state, depts };
+            return { ...state, depts: getUpdatedDepts(state.depts, action.payload) };
         default:
             return state;
     }
