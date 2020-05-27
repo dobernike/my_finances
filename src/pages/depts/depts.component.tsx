@@ -18,8 +18,10 @@ type Props = {
 
 export class DeptsPage extends React.Component<Props> {
     componentDidMount() {
-        if (!this.props.depts.length) {
-            this.props.fetchDepts();
+        const { depts, fetchDepts } = this.props;
+
+        if (!depts.length) {
+            fetchDepts();
         }
     }
 
@@ -43,6 +45,8 @@ export class DeptsPage extends React.Component<Props> {
     };
 
     render() {
+        const { depts } = this.props;
+
         const tableBody = (
             <>
                 <thead>
@@ -59,7 +63,7 @@ export class DeptsPage extends React.Component<Props> {
                     </tr>
                 </thead>
                 <tbody onClick={this.handleClick} role="presentation">
-                    {this.props.depts.map((dept) => (
+                    {depts.map((dept) => (
                         <tr key={dept.id} id={dept.id} className={styles.tr}>
                             <th>{dept.id}</th>
                             <td>{dept.whom}</td>

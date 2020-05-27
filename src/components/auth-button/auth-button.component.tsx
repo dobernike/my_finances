@@ -11,12 +11,14 @@ type Props = {
 
 export class AuthButton extends React.PureComponent<Props> {
     render() {
-        return this.props.isAuthenticated ? (
-            <Button onClick={this.props.logOut} className={styles.button}>
+        const { isAuthenticated, logIn, logOut } = this.props;
+
+        return isAuthenticated ? (
+            <Button onClick={logOut} className={styles.button}>
                 Выйти
             </Button>
         ) : (
-            <Button onClick={this.props.logIn} className={styles.button}>
+            <Button onClick={logIn} className={styles.button}>
                 Войти
             </Button>
         );

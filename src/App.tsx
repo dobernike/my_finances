@@ -16,7 +16,9 @@ type Props = {
 
 class AppComponent extends React.PureComponent<Props> {
     render() {
-        return <Layout>{getRouting(this.props.isAuthenticated)}</Layout>;
+        const { isAuthenticated } = this.props;
+
+        return <Layout>{getRouting(isAuthenticated)}</Layout>;
     }
 }
 

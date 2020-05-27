@@ -21,7 +21,6 @@ type Props = {
     match: { params: { deptId: string } };
     addDept(newDept: Dept): void;
     updateDept(updatedDept: Dept): void;
-    getDept(id: string): Dept;
 };
 
 type State = {
@@ -42,7 +41,8 @@ export class DeptPage extends React.Component<Props, State> {
     }
 
     render() {
-        const { deptId } = this.props.match.params;
+        const { addDept, history, match, updateDept } = this.props;
+        const { deptId } = match.params;
         const { dept } = this.state;
 
         if (deptId !== 'new' && dept === null) {
@@ -67,10 +67,10 @@ export class DeptPage extends React.Component<Props, State> {
                         comment: dept ? dept.comment : '',
                     }}
                     onSubmit={(values, { setSubmitting }) => {
-                        deptId === 'new' ? this.props.addDept(values) : this.props.updateDept(values);
+                        deptId === 'new' ? addDept(values) : updateDept(values);
 
                         setSubmitting(false);
-                        this.props.history.goBack();
+                        history.goBack();
                     }}>
                     {({ values, handleChange, handleSubmit, isSubmitting }) => (
                         <form onSubmit={handleSubmit} className={styles.form}>

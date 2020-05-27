@@ -32,6 +32,7 @@ export class Header extends React.Component<Props, State> {
 
     render() {
         const { isAuthenticated } = this.props;
+        const { isMenuOpened } = this.state;
         const routes = getRoutes(isAuthenticated).filter((route) => route.label);
 
         return (
@@ -39,7 +40,7 @@ export class Header extends React.Component<Props, State> {
                 <div className={styles.banner}>
                     <Button className={styles.menuButton} onClick={this.handleToggleMenu} icon="menu" minimal />
                     <Drawer
-                        isOpen={this.state.isMenuOpened}
+                        isOpen={isMenuOpened}
                         onClose={this.handleCloseMenu}
                         canOutsideClickClose
                         hasBackdrop

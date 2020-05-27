@@ -10,10 +10,12 @@ type Props = {
 
 export class Layout extends React.PureComponent<Props> {
     render() {
+        const { children } = this.props;
+
         return (
             <div className={styles.layout}>
                 <HeaderContainer />
-                <main className={styles.main}>{this.props.children}</main>
+                <main className={styles.main}>{children}</main>
             </div>
         );
     }
