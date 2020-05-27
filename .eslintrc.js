@@ -156,6 +156,7 @@ module.exports = {
                 depth: 2,
             },
         ],
+        'react/jsx-props-no-spreading': 0, // HOC
         'react/no-array-index-key': 1,
         'react/no-will-update-set-state': 1, // ВКЛЮЧИТЬ
         'react/require-default-props': 0,

@@ -1,22 +1,26 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
 import { RootState } from '../../redux/root-reducer';
 import { DeptsState } from '../../redux/depts/depts.reducer';
-import { fetchDepts, deleteDept } from '../../redux/depts/depts.actions';
-import { selectItems } from '../../redux/depts/depts.selectors';
+import { fetchDeptsStart, deleteDept } from '../../redux/depts/depts.actions';
+import { selectItems, selectIsFetching, selectErrorMessage } from '../../redux/depts/depts.selectors';
 
+import { WithLoader } from '../../components/with-loader/with-loader.component';
 import { DeptsPage } from './depts.component';
 
 const mapStateToProps = createStructuredSelector<RootState, DeptsState>({
     depts: selectItems,
+    isFetching: selectIsFetching,
+    errorMessage: selectErrorMessage,
 });
 
 const mapDispatchToProps = {
-    fetchDepts,
+    fetchDeptsStart,
     deleteDept,
 };
 
-const DeptsContainer = connect(mapStateToProps, mapDispatchToProps)(DeptsPage);
+const DeptsPageContainer = compose(connect(mapStateToProps, mapDispatchToProps), WithLoader)(DeptsPage);
 
-export default DeptsContainer;
+export default DeptsPageContainer;

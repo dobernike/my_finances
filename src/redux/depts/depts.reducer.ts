@@ -10,33 +10,57 @@ export type Dept = {
     comment: string;
 };
 
-export type Depts = Dept[];
-
 export type DeptsState = {
-    depts: Depts;
+    depts: Dept[];
+    isFetching: boolean;
+    errorMessage: string;
 };
 
-type FetchDeptsAction = {
+export type DeptsAction = {
     type: string;
-    payload: Depts & Dept & string;
+    payload: Dept[] & Dept & string;
 };
-
-type FetchAction = FetchDeptsAction;
 
 const initialState: DeptsState = {
     depts: [],
+    isFetching: false,
+    errorMessage: undefined,
 };
 
-export const deptsReducer = (state = initialState, action: FetchAction) => {
+export const deptsReducer = (state = initialState, action: DeptsAction) => {
     switch (action.type) {
-        case DeptsActionTypes.FETCH_DEPTS:
-            return { ...state, depts: [...action.payload] };
+        case DeptsActionTypes.FETCH_DEPTS_START:
+            return {
+                ...state,
+                isFetching: true,
+            };
+        case DeptsActionTypes.FETCH_DEPTS_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                depts: action.payload,
+            };
+        case DeptsActionTypes.FETCH_DEPTS_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                errorMessage: action.payload,
+            };
         case DeptsActionTypes.ADD_DEPT:
-            return { ...state, depts: [...state.depts, action.payload] };
+            return {
+                ...state,
+                depts: [...state.depts, action.payload],
+            };
         case DeptsActionTypes.DELETE_DEPT:
-            return { ...state, depts: getFilteredDepts(state.depts, action.payload) };
+            return {
+                ...state,
+                depts: getFilteredDepts(state.depts, action.payload),
+            };
         case DeptsActionTypes.UPDATE_DEPT:
-            return { ...state, depts: getUpdatedDepts(state.depts, action.payload) };
+            return {
+                ...state,
+                depts: getUpdatedDepts(state.depts, action.payload),
+            };
         default:
             return state;
     }

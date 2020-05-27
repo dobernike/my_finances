@@ -1,0 +1,13 @@
+.tr {
+    cursor: pointer;
+}
+
+td[data-delete] {
+    color: red;
+    transition: opacity 0.2s ease-in-out 0.1s;
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+}

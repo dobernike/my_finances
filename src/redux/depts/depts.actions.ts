@@ -1,47 +1,32 @@
-import { Dispatch } from 'redux';
+import { Dept } from '../depts/depts.reducer';
 
 import { DeptsActionTypes } from './depts.types';
 
-import { http } from '../../utils/http';
+export const fetchDeptsStart = () => ({
+    type: DeptsActionTypes.FETCH_DEPTS_START,
+});
 
-import { Dept } from '../depts/depts.reducer';
+export const fetchDeptsSuccess = (depts: Dept[]) => ({
+    type: DeptsActionTypes.FETCH_DEPTS_SUCCESS,
+    payload: depts,
+});
 
-export const fetchDepts = () => {
-    return async (dispatch: Dispatch) => {
-        const depts = await http('http://localhost:3001/user-depts');
+export const fetchDeptsFailure = (errorMessage: string) => ({
+    type: DeptsActionTypes.FETCH_DEPTS_FAILURE,
+    payload: errorMessage,
+});
 
-        dispatch({
-            type: DeptsActionTypes.FETCH_DEPTS,
-            payload: depts,
-        });
-    };
-};
+export const addDept = (dept: Dept) => ({
+    type: DeptsActionTypes.ADD_DEPT,
+    payload: dept,
+});
 
-export const addDept = (newDept: Dept) => {
-    return async (dispatch: Dispatch) => {
-        const dept = await http('http://localhost:3001/user-depts', 'POST', newDept);
+export const deleteDept = (id: string) => ({
+    type: DeptsActionTypes.DELETE_DEPT,
+    payload: id,
+});
 
-        dispatch({
-            type: DeptsActionTypes.ADD_DEPT,
-            payload: dept,
-        });
-    };
-};
-
-export const deleteDept = (id: string) => {
-    return async (dispatch: Dispatch) => {
-        await http(`http://localhost:3001/user-depts/${id}`, 'DELETE');
-        dispatch({ type: DeptsActionTypes.DELETE_DEPT, payload: id });
-    };
-};
-
-export const updateDept = (updatedDept: Dept) => {
-    return async (dispatch: Dispatch) => {
-        const dept = await http(`http://localhost:3001/user-depts/${updatedDept.id}`, 'PUT', updatedDept);
-
-        dispatch({
-            type: DeptsActionTypes.UPDATE_DEPT,
-            payload: dept,
-        });
-    };
-};
+export const updateDept = (dept: Dept) => ({
+    type: DeptsActionTypes.UPDATE_DEPT,
+    payload: dept,
+});

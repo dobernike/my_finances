@@ -1,15 +1,51 @@
-import { all, call, takeLatest } from 'redux-saga/effects';
+import { all, call, takeLatest, put } from 'redux-saga/effects';
+
+import { fetchDeptsSuccess, fetchDeptsFailure } from './depts.actions';
+
+import { http } from '../../utils/http';
+
+import { Dept, DeptsAction } from './depts.reducer';
 
 import { DeptsActionTypes } from './depts.types';
 
-export function* fetchDepts() {
-    yield DeptsActionTypes.FETCH_DEPTS;
+export function* fetchDeptsAsync() {
+    try {
+        const depts: Dept[] = yield call(http, 'http://localhost:3001/user-depts');
+
+        yield put(fetchDeptsSuccess(depts));
+    } catch (error) {
+        yield put(fetchDeptsFailure(error.message));
+    }
 }
 
-export function* onFetchDepts() {
-    yield takeLatest(DeptsActionTypes.FETCH_DEPTS, fetchDepts);
+export function* addDept({ payload }: DeptsAction) {
+    yield call(http, 'http://localhost:3001/user-depts', 'POST', payload);
+}
+
+export function* deleteDept({ payload }: DeptsAction) {
+    yield call(http, `http://localhost:3001/user-depts/${payload}`, 'DELETE');
+}
+
+export function* updateDept({ payload }: DeptsAction) {
+    yield call(http, `http://localhost:3001/user-depts/${payload.id}`, 'PUT', payload);
+}
+
+export function* fetchDeptsStart() {
+    yield takeLatest(DeptsActionTypes.FETCH_DEPTS_START, fetchDeptsAsync);
+}
+
+export function* onAddDept() {
+    yield takeLatest(DeptsActionTypes.ADD_DEPT, addDept);
+}
+
+export function* onDeleteDept() {
+    yield takeLatest(DeptsActionTypes.DELETE_DEPT, deleteDept);
+}
+
+export function* onUpdateDept() {
+    yield takeLatest(DeptsActionTypes.UPDATE_DEPT, updateDept);
 }
 
 export function* deptsSagas() {
-    yield all([call(onFetchDepts)]);
+    yield all([call(fetchDeptsStart), call(onAddDept), call(onDeleteDept), call(onUpdateDept)]);
 }

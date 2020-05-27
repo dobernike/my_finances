@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { addDept, updateDept } from '../../redux/depts/depts.actions';
 
+import { WithLoader } from '../../components/with-loader/with-loader.component';
 import { DeptPage } from './dept.component';
 
 const mapDispatchToProps = {
@@ -9,6 +11,6 @@ const mapDispatchToProps = {
     updateDept,
 };
 
-const DeptContainer = connect(null, mapDispatchToProps)(DeptPage);
+const DeptPageContainer = compose(connect(null, mapDispatchToProps), WithLoader)(DeptPage);
 
-export default DeptContainer;
+export default DeptPageContainer;
