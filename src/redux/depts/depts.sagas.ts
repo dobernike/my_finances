@@ -2,7 +2,7 @@ import { all, call, takeLatest, put } from 'redux-saga/effects';
 
 import { fetchDeptsSuccess, fetchDeptsFailure } from './depts.actions';
 
-import { http } from '../../utils/http';
+import { request } from '../../utils/request';
 
 import { Dept, DeptsAction } from './depts.reducer';
 
@@ -10,7 +10,7 @@ import { DeptsActionTypes } from './depts.types';
 
 export function* fetchDeptsAsync() {
     try {
-        const depts: Dept[] = yield call(http, 'http://localhost:3001/user-depts');
+        const depts: Dept[] = yield call(request, 'http://localhost:3001/user-depts');
 
         yield put(fetchDeptsSuccess(depts));
     } catch (error) {
@@ -19,15 +19,15 @@ export function* fetchDeptsAsync() {
 }
 
 export function* addDept({ payload }: DeptsAction) {
-    yield call(http, 'http://localhost:3001/user-depts', 'POST', payload);
+    yield call(request, 'http://localhost:3001/user-depts', 'POST', payload);
 }
 
 export function* deleteDept({ payload }: DeptsAction) {
-    yield call(http, `http://localhost:3001/user-depts/${payload}`, 'DELETE');
+    yield call(request, `http://localhost:3001/user-depts/${payload}`, 'DELETE');
 }
 
 export function* updateDept({ payload }: DeptsAction) {
-    yield call(http, `http://localhost:3001/user-depts/${payload.id}`, 'PUT', payload);
+    yield call(request, `http://localhost:3001/user-depts/${payload.id}`, 'PUT', payload);
 }
 
 export function* fetchDeptsStart() {

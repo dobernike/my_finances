@@ -1,9 +1,9 @@
-import { http } from '../../utils/http';
+import { request } from '../../utils/request';
 
 import { Dept } from './depts.reducer';
 
 export const getDept = async (id: string) => {
-    const depts: Dept[] = await http('http://localhost:3001/user-depts');
+    const depts: Dept[] = await request('http://localhost:3001/user-depts');
 
     return depts.find((dept) => dept.id === id);
 };
