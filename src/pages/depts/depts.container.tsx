@@ -21,6 +21,9 @@ const mapDispatchToProps = {
     deleteDept,
 };
 
-const DeptsPageContainer = compose(connect(mapStateToProps, mapDispatchToProps), WithLoader)(DeptsPage);
+const DeptsPageContainer = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithLoader
+)(DeptsPage) as React.ComponentType;
 
 export default DeptsPageContainer;

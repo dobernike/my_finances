@@ -11,6 +11,6 @@ const mapDispatchToProps = {
     updateDept,
 };
 
-const DeptPageContainer = compose(connect(null, mapDispatchToProps), WithLoader)(DeptPage);
+const DeptPageContainer = compose(connect(null, mapDispatchToProps), WithLoader)(DeptPage) as React.ComponentType;
 
 export default DeptPageContainer;
