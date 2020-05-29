@@ -1,4 +1,4 @@
-export async function http(url: RequestInfo, method = 'GET', data: object = null) {
+export async function request(url: RequestInfo, method = 'GET', data: object = null) {
     try {
         const headers: HeadersInit = {};
         let body;
