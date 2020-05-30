@@ -6,3 +6,6 @@ export const DeptsActionTypes = {
     DELETE_DEPT: 'DELETE_DEPT',
     UPDATE_DEPT: 'UPDATE_DEPT',
 };
+
+export const FETCH_DEPTS_FAILURE = 'FETCH_DEPTS_FAILURE';
+export const FETCH_DEPTS_SUCCESS = 'FETCH_DEPTS_SUCCESS';

@@ -1,15 +1,8 @@
+import { LogInAction, LogOutAction } from './user.actions';
 import { UserActionTypes } from './user.types';
 
 export type UserState = {
     isAuthenticated: boolean;
-};
-
-type LogInAction = {
-    type: string;
-};
-
-type LogOutAction = {
-    type: string;
 };
 
 export type UserAction = LogInAction | LogOutAction;

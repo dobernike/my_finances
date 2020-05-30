@@ -1,4 +1,12 @@
-import { DeptsActionTypes } from './depts.types';
+import {
+    FetchDeptsStartAction,
+    FetchDeptsSuccessAction,
+    FetchDeptsFailureAction,
+    AddDeptAction,
+    DeleteDeptAction,
+    UpdateDeptAction,
+} from './depts.actions';
+import { DeptsActionTypes, FETCH_DEPTS_FAILURE, FETCH_DEPTS_SUCCESS } from './depts.types';
 import { getFilteredDepts, getUpdatedDepts } from './depts.utils';
 
 export type Dept = {
@@ -16,10 +24,13 @@ export type DeptsState = {
     errorMessage: string;
 };
 
-export type DeptsAction = {
-    type: string;
-    payload: Dept[] & Dept & string;
-};
+export type DeptsAction =
+    | FetchDeptsStartAction
+    | FetchDeptsSuccessAction
+    | FetchDeptsFailureAction
+    | AddDeptAction
+    | DeleteDeptAction
+    | UpdateDeptAction;
 
 const initialState: DeptsState = {
     depts: [],
@@ -34,13 +45,13 @@ export const deptsReducer = (state = initialState, action: DeptsAction) => {
                 ...state,
                 isFetching: true,
             };
-        case DeptsActionTypes.FETCH_DEPTS_SUCCESS:
+        case FETCH_DEPTS_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 depts: action.payload,
             };
-        case DeptsActionTypes.FETCH_DEPTS_FAILURE:
+        case FETCH_DEPTS_FAILURE:
             return {
                 ...state,
                 isFetching: false,
