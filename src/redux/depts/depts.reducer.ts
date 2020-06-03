@@ -1,13 +1,7 @@
-import {
-    FetchDeptsStartAction,
-    FetchDeptsSuccessAction,
-    FetchDeptsFailureAction,
-    AddDeptAction,
-    DeleteDeptAction,
-    UpdateDeptAction,
-} from './depts.actions';
-import { DeptsActionTypes, FETCH_DEPTS_FAILURE, FETCH_DEPTS_SUCCESS } from './depts.types';
+import * as actions from './depts.actions';
+import { DeptsActionTypes } from './depts.types';
 import { getFilteredDepts, getUpdatedDepts } from './depts.utils';
+import { InferValueTypes } from '../types';
 
 export type Dept = {
     id: string;
@@ -24,19 +18,13 @@ export type DeptsState = {
     errorMessage: string;
 };
 
-export type DeptsAction =
-    | FetchDeptsStartAction
-    | FetchDeptsSuccessAction
-    | FetchDeptsFailureAction
-    | AddDeptAction
-    | DeleteDeptAction
-    | UpdateDeptAction;
-
 const initialState: DeptsState = {
     depts: [],
     isFetching: false,
     errorMessage: undefined,
 };
+
+export type DeptsAction = ReturnType<InferValueTypes<typeof actions>>;
 
 export const deptsReducer = (state = initialState, action: DeptsAction) => {
     switch (action.type) {
@@ -45,13 +33,13 @@ export const deptsReducer = (state = initialState, action: DeptsAction) => {
                 ...state,
                 isFetching: true,
             };
-        case FETCH_DEPTS_SUCCESS:
+        case DeptsActionTypes.FETCH_DEPTS_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 depts: action.payload,
             };
-        case FETCH_DEPTS_FAILURE:
+        case DeptsActionTypes.FETCH_DEPTS_FAILURE:
             return {
                 ...state,
                 isFetching: false,

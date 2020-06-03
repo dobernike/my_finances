@@ -1,10 +1,10 @@
-import { all, call, takeLatest, put } from 'redux-saga/effects';
+import { all, call, takeLatest, put, Effect } from 'redux-saga/effects';
 
 import { fetchDeptsSuccess, fetchDeptsFailure } from './depts.actions';
 
 import { request } from '../../utils/request';
 
-import { Dept, DeptsAction } from './depts.reducer';
+import { Dept } from './depts.reducer';
 
 import { DeptsActionTypes } from './depts.types';
 
@@ -18,15 +18,15 @@ export function* fetchDeptsAsync() {
     }
 }
 
-export function* addDept({ payload }: DeptsAction) {
+export function* addDept({ payload }: Effect) {
     yield call(request, 'http://localhost:3001/user-depts', 'POST', payload);
 }
 
-export function* deleteDept({ payload }: DeptsAction) {
+export function* deleteDept({ payload }: Effect) {
     yield call(request, `http://localhost:3001/user-depts/${payload}`, 'DELETE');
 }
 
-export function* updateDept({ payload }: DeptsAction) {
+export function* updateDept({ payload }: Effect) {
     yield call(request, `http://localhost:3001/user-depts/${payload.id}`, 'PUT', payload);
 }
 

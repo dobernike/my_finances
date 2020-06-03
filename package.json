@@ -47,19 +47,9 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged",
+            "pre-commit": "npm run lint",
             "pre-push": "npm run jest:coverage"
         }
-    },
-    "lint-staged": {
-        "*.(js|jsx|ts|tsx)": [
-            "eslint --cache --fix",
-            "git add"
-        ],
-        "*.(css)": [
-            "stylelint --formatter=verbose",
-            "git add"
-        ]
     },
     "dependencies": {
         "@blueprintjs/core": "^3.23.1",

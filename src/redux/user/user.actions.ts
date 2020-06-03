@@ -1,14 +1,9 @@
 import { UserActionTypes } from './user.types';
-import { ActionType } from '../types';
 
-export type LogInAction = ActionType;
-
-export const logIn = (): LogInAction => ({
+export const logIn = () => ({
     type: UserActionTypes.LOG_IN,
 });
 
-export type LogOutAction = ActionType;
-
-export const logOut = (): LogOutAction => ({
+export const logOut = () => ({
     type: UserActionTypes.LOG_OUT,
 });
