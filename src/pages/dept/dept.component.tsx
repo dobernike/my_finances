@@ -17,7 +17,10 @@ function randomInteger(min: number, max: number) {
 }
 
 type Props = {
-    history: { goBack(): void };
+    history: {
+        goBack(): void;
+        push(path: string): void;
+    };
     match: { params: { deptId: string } };
     addDept(newDept: Dept): void;
     updateDept(updatedDept: Dept): void;
@@ -31,12 +34,17 @@ export class DeptPage extends React.Component<Props, State> {
     state: State = { dept: null };
 
     async componentDidMount() {
-        const { deptId } = this.props.match.params;
+        const { history, match } = this.props;
+        const { deptId } = match.params;
 
         if (deptId !== 'new') {
             const dept = await getDept(deptId);
 
-            this.setState({ dept });
+            if (dept) {
+                this.setState({ dept });
+            } else {
+                history.push('new');
+            }
         }
     }
 
