@@ -1,14 +1,16 @@
 import { selectIsAuthenticated } from '../user.selectors';
+import { UserState } from '../user.reducer';
 
 describe('user selectors', () => {
-    it('should return user.isAuthenticated as boolean', () => {
-        const mockParameters = {
-            user: {
-                isAuthenticated: false,
-            },
-        };
-        const selected = selectIsAuthenticated.resultFunc(mockParameters.user);
+    const userState: UserState = {
+        isAuthenticated: false,
+    };
 
-        expect(typeof selected).toEqual('boolean');
+    describe('selectIsAuthenticated', () => {
+        it('should return user.isAuthenticated as boolean', () => {
+            const selected = selectIsAuthenticated.resultFunc(userState);
+
+            expect(typeof selected).toEqual('boolean');
+        });
     });
 });
