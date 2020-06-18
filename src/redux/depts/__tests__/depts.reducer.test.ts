@@ -1,7 +1,7 @@
 import { deptsReducer, DeptsState, DeptsAction, Dept } from '../depts.reducer';
 import { DeptsActionTypes } from '../depts.types';
 
-describe('user reducer', () => {
+describe('depts reducer', () => {
     let INITIAL_STATE: DeptsState;
     const DEPT: Dept = {
         id: '1',

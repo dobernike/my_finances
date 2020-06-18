@@ -2,11 +2,10 @@ import { all, call, takeLatest, put, Effect } from 'redux-saga/effects';
 
 import { fetchDeptsSuccess, fetchDeptsFailure } from './depts.actions';
 
-import { request } from '../../utils/request';
-
 import { Dept } from './depts.reducer';
-
 import { DeptsActionTypes } from './depts.types';
+
+import { request } from '../../utils/request';
 
 export function* fetchDeptsAsync() {
     try {
