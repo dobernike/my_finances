@@ -1,8 +1,10 @@
 // @ts-nocheck
 import { runSaga } from 'redux-saga';
 
+import { Action } from 'redux';
 import { fetchDeptsAsync } from '../depts.sagas';
 import { fetchDeptsSuccess, fetchDeptsFailure } from '../depts.actions';
+import { DeptsState } from '../depts.reducer';
 
 import * as utils from '../../../utils/request';
 
@@ -16,20 +18,20 @@ describe('depts sagas', () => {
         comment: 'Comment',
     };
 
-    const INITIAL_STATE = {
+    const INITIAL_STATE: DeptsState = {
         depts: [],
         isFetching: false,
         errorMessage: undefined,
     };
 
-    let dispatchedActions;
-    let fakeStore;
+    let dispatchedActions: any[];
+    let fakeStore: {};
 
     beforeEach(() => {
         dispatchedActions = [];
         fakeStore = {
             getState: () => INITIAL_STATE,
-            dispatch: (action) => dispatchedActions.push(action),
+            dispatch: (action: Action) => dispatchedActions.push(action),
         };
     });
 
@@ -37,7 +39,6 @@ describe('depts sagas', () => {
         it('should load depts and handle them in case of success', async () => {
             const mockedDepts = [DEPT, DEPT];
 
-            // eslint-disable-next-line max-nested-callbacks
             utils.request = jest.fn(() => Promise.resolve(mockedDepts));
 
             await runSaga(fakeStore, fetchDeptsAsync);
@@ -49,7 +50,6 @@ describe('depts sagas', () => {
         it('should handle errors in case of fail', async () => {
             const error = { message: 'Some error is thrown' };
 
-            // eslint-disable-next-line max-nested-callbacks
             utils.request = jest.fn(() => Promise.reject(error));
 
             await runSaga(fakeStore, fetchDeptsAsync);
