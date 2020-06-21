@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { runSaga } from 'redux-saga';
-
 import { Action } from 'redux';
+
 import { fetchDeptsAsync } from '../depts.sagas';
 import { fetchDeptsSuccess, fetchDeptsFailure } from '../depts.actions';
 import { DeptsState } from '../depts.reducer';
