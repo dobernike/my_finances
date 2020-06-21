@@ -5,7 +5,7 @@ import { depts } from '../../mocks/api/depts.mock.json';
 
 describe('utils', () => {
     describe('request', () => {
-        it('should load depts and handle them in case of success', async () => {
+        it('should return data if resolve', async () => {
             // eslint-disable-next-line max-nested-callbacks
             global.fetch = jest.fn(() =>
                 Promise.resolve({
@@ -19,7 +19,7 @@ describe('utils', () => {
             expect(json).toEqual(depts);
         });
 
-        it('should handle errors in case of fail', async () => {
+        it('should throw error if reject', async () => {
             const error = { message: 'Some error is thrown' };
 
             global.fetch = jest.fn(() => Promise.reject(error));
