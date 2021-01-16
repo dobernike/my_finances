@@ -1,28 +1,29 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import Layout from './hoc/Layout/Layout';
-import { RootState } from './store/reducers/rootReducer';
+import { createStructuredSelector } from 'reselect';
+
+import { Layout } from './components/layout/layout.component';
+
 import { getRouting } from './routes';
-import './constants/colors.css';
+
+import { RootState } from './redux/root-reducer';
+import { selectIsAuthenticated } from './redux/user/user.selectors';
+import { UserState } from './redux/user/user.reducer';
 
 type Props = {
     isAuthenticated: boolean;
 };
 
-class App extends PureComponent<Props> {
+class AppComponent extends React.PureComponent<Props> {
     render() {
-        const routing = getRouting(this.props.isAuthenticated);
+        const { isAuthenticated } = this.props;
 
-        return (
-            <ErrorBoundary>
-                <Router>
-                    <Layout>{routing}</Layout>
-                </Router>
-            </ErrorBoundary>
-        );
+        return <Layout>{getRouting(isAuthenticated)}</Layout>;
     }
 }
 
-export default connect((state: RootState) => ({ isAuthenticated: state.auth.isAuthenticated }))(App);
+const mapStateToProps = createStructuredSelector<RootState, UserState>({
+    isAuthenticated: selectIsAuthenticated,
+});
+
+export const App = connect(mapStateToProps)(AppComponent);

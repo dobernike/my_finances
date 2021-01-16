@@ -1,8 +1,0 @@
-.button {
-    min-width: 70px;
-
-    @media (--media-tablet) {
-        min-width: 120px;
-        min-height: 38px;
-    }
-}

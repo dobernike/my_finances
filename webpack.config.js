@@ -165,6 +165,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: cssLoaders(),
+                sideEffects: true,
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,
